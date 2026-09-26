@@ -1,1098 +1,1412 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aether Homes | Premium Real Estate</title>
-<meta name="description" content="Aether Homes offers premium real estate, luxury homes, property management, and investment advisory services across Nigeria.">
-<meta name="theme-color" content="#0a1525">
-<meta property="og:title" content="Aether Homes | Premium Real Estate">
-<meta property="og:description" content="Curated residences in Nigeria's most prestigious locations for those who refuse to settle.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://aetherhomes.com">
-<meta property="og:image" content="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80">
-<link rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a1525'/%3E%3Cpath d='M16 22.5c0-4.1 3.3-7.5 7.5-7.5h17c4.1 0 7.5 3.4 7.5 7.5v19c0 4.1-3.4 7.5-7.5 7.5h-17c-4.2 0-7.5-3.4-7.5-7.5v-19zm8 8.5h16v-5H24v5zm0 7h12v-5H24v5z' fill='%23c9a227'/%3E%3C/svg%3E">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-:root {
-  --navy: #0a1525;
-  --navy-mid: #122033;
-  --gold: #c9a227;
-  --gold-light: #e0b93a;
-  --cream: #f8f5f0;
-  --white: #ffffff;
-  --gray: #5a6a7a;
-  --gray-light: #e6eaef;
-  --shadow: 0 12px 40px rgba(10,21,37,0.08);
-  --shadow-hover: 0 24px 50px rgba(10,21,37,0.14);
-  --success: #1d8f5a;
-  --error: #b42318;
-}
-* { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior:smooth; }
-body { font-family:'Inter',sans-serif; color:var(--navy); background:var(--cream); line-height:1.65; -webkit-font-smoothing:antialiased; }
-h1,h2,h3,h4 { font-family:'Playfair Display',serif; font-weight:600; line-height:1.2; }
-a { text-decoration:none; color:inherit; }
-img { max-width:100%; display:block; }
-.container { max-width:1240px; margin:0 auto; padding:0 28px; }
-
-/* Header */
-header { position:fixed; top:0; left:0; width:100%; z-index:1000; background:rgba(10,21,37,0.94); backdrop-filter:blur(16px); transition:all .35s; }
-header.scrolled { box-shadow:0 4px 30px rgba(0,0,0,0.25); }
-nav { display:flex; justify-content:space-between; align-items:center; height:84px; }
-.logo { font-family:'Playfair Display',serif; font-size:1.55rem; color:#fff; font-weight:600; }
-.logo span { color:var(--gold); }
-.nav-links { display:flex; gap:36px; list-style:none; align-items:center; }
-.nav-links a { color:rgba(255,255,255,0.88); font-size:0.92rem; font-weight:500; transition:color .25s; }
-.nav-links a:hover { color:var(--gold); }
-.nav-cta { background:var(--gold)!important; color:var(--navy)!important; padding:11px 22px; border-radius:5px; font-weight:600; }
-.nav-cta:hover { background:var(--gold-light)!important; }
-.hamburger { display:none; flex-direction:column; justify-content:center; gap:6px; width:32px; height:32px; cursor:pointer; z-index:1001; }
-.hamburger span { display:block; width:100%; height:2px; background:#fff; border-radius:2px; transition:all .3s; }
-.hamburger.active span:nth-child(1){ transform:translateY(8px) rotate(45deg); }
-.hamburger.active span:nth-child(2){ opacity:0; }
-.hamburger.active span:nth-child(3){ transform:translateY(-8px) rotate(-45deg); }
-
-/* Hero with rotating images */
-.hero {
-  height:100vh; min-height:700px; position:relative; display:flex; align-items:center;
-  color:#fff; text-align:center; overflow:hidden;
-}
-.hero-slides { position:absolute; inset:0; }
-.hero-slide {
-  position:absolute; inset:0; background-size:cover; background-position:center;
-  opacity:0; transition:opacity 1.4s ease;
-}
-.hero-slide.active { opacity:1; }
-.hero-overlay {
-  position:absolute; inset:0;
-  background:linear-gradient(135deg, rgba(10,21,37,0.78), rgba(10,21,37,0.55));
-  z-index:1;
-}
-.hero-content { position:relative; z-index:2; max-width:820px; margin:0 auto; }
-.hero-badge {
-  display:inline-block; background:rgba(201,162,39,0.2); border:1px solid rgba(201,162,39,0.45);
-  color:var(--gold-light); padding:6px 18px; border-radius:30px; font-size:0.78rem;
-  font-weight:600; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:28px;
-}
-.hero h1 { font-size:clamp(2.8rem,5.5vw,4.3rem); margin-bottom:20px; letter-spacing:-0.5px; }
-.hero p { font-size:1.18rem; opacity:0.9; margin-bottom:40px; font-weight:300; max-width:560px; margin-left:auto; margin-right:auto; }
-.hero-btns { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
-.btn { display:inline-block; padding:15px 32px; border-radius:7px; font-weight:600; font-size:0.95rem; cursor:pointer; transition:all .25s; border:none; }
-.btn-gold { background:var(--gold); color:var(--navy); }
-.btn-gold:hover { background:var(--gold-light); transform:translateY(-2px); }
-.btn-outline { background:transparent; color:#fff; border:1.5px solid rgba(255,255,255,0.5); }
-.btn-outline:hover { border-color:#fff; background:rgba(255,255,255,0.1); }
-
-/* Sections */
-section { padding:100px 0; }
-.section-header { text-align:center; margin-bottom:56px; }
-.section-header h2 { font-size:clamp(2.1rem,3.5vw,2.7rem); margin-bottom:14px; }
-.section-header p { color:var(--gray); max-width:520px; margin:0 auto; }
-.gold-line { width:52px; height:3px; background:var(--gold); margin:18px auto 0; }
-
-/* Filters */
-.filters-bar {
-  background:#fff; border-radius:12px; padding:18px 22px; display:flex; flex-wrap:wrap;
-  gap:14px; align-items:center; margin-bottom:40px; box-shadow:var(--shadow);
-}
-.filter-group { display:flex; flex-direction:column; gap:4px; }
-.filter-group label { font-size:0.72rem; font-weight:600; color:var(--gray); text-transform:uppercase; letter-spacing:0.5px; }
-.filter-group select {
-  border:1.5px solid var(--gray-light); border-radius:6px; padding:9px 12px; font-size:0.9rem;
-  color:var(--navy); background:#fff; min-width:140px; font-family:inherit; cursor:pointer; outline:none;
-}
-.filter-reset {
-  margin-left:auto; background:transparent; border:1.5px solid var(--gray-light);
-  padding:9px 18px; border-radius:6px; font-size:0.88rem; font-weight:500; cursor:pointer; color:var(--gray);
-}
-
-/* Properties */
-.properties-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:30px; }
-.property-card {
-  background:#fff; border-radius:12px; overflow:hidden; box-shadow:var(--shadow);
-  transition:transform .35s, box-shadow .35s; cursor:pointer;
-}
-.property-card:hover { transform:translateY(-8px); box-shadow:var(--shadow-hover); }
-.property-img { height:240px; background-size:cover; background-position:center; position:relative; }
-.property-badge {
-  position:absolute; top:14px; left:14px; background:var(--gold); color:var(--navy);
-  padding:5px 12px; border-radius:4px; font-size:0.72rem; font-weight:700; text-transform:uppercase;
-}
-.fav-btn {
-  position:absolute; top:12px; right:12px; width:36px; height:36px; background:#fff; border:none;
-  border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer;
-  font-size:1.05rem; box-shadow:0 4px 12px rgba(0,0,0,0.12);
-}
-.fav-btn.active { color:#e11d48; }
-.property-info { padding:22px 24px; }
-.property-price { font-size:1.4rem; font-weight:600; margin-bottom:6px; }
-.property-title { font-size:1.15rem; margin-bottom:6px; }
-.property-location { color:var(--gray); font-size:0.9rem; margin-bottom:14px; }
-.property-meta { display:flex; gap:18px; font-size:0.88rem; color:var(--gray); border-top:1px solid var(--gray-light); padding-top:14px; }
-.empty-state { grid-column:1/-1; text-align:center; padding:60px 20px; color:var(--gray); }
-
-/* About */
-.about { background:#fff; }
-.about-grid { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
-.about-img {
-  height:480px; background:url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=900&q=85') center/cover;
-  border-radius:12px; position:relative;
-}
-.about-img::after {
-  content:''; position:absolute; inset:16px; border:1.5px solid rgba(201,162,39,0.5);
-  border-radius:8px; pointer-events:none;
-}
-.about-content h2 { font-size:2.4rem; margin-bottom:20px; }
-.about-content p { color:var(--gray); margin-bottom:16px; font-size:1.02rem; }
-.stats { display:flex; gap:40px; margin-top:36px; }
-.stat h3 { font-size:2.3rem; color:var(--gold); }
-.stat p { font-size:0.88rem; color:var(--gray); }
-
-/* Services */
-.services-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:28px; }
-.service-card {
-  background:#fff; padding:42px 32px; border-radius:12px; text-align:center;
-  box-shadow:var(--shadow); transition:transform .3s, box-shadow .3s;
-}
-.service-card:hover { transform:translateY(-8px); box-shadow:var(--shadow-hover); }
-.service-icon {
-  width:68px; height:68px; background:rgba(201,162,39,0.12); border-radius:50%;
-  display:flex; align-items:center; justify-content:center; margin:0 auto 24px; font-size:1.7rem;
-}
-.service-card h3 { margin-bottom:12px; font-size:1.25rem; }
-.service-card p { color:var(--gray); font-size:0.95rem; }
-
-/* Team */
-.team-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:28px; }
-.team-card {
-  background:#fff; border-radius:12px; overflow:hidden; box-shadow:var(--shadow); transition:transform .25s ease, box-shadow .25s ease;
-}
-.team-card:hover { transform:translateY(-8px); box-shadow:var(--shadow-hover); }
-.team-photo {
-  height:260px; background-size:cover; background-position:center; position:relative;
-}
-.team-info { padding:22px 20px 18px; }
-.team-info h3 { font-size:1.3rem; margin-bottom:4px; }
-.team-role { color:var(--gold); font-size:0.8rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:10px; }
-.team-specialty { color:var(--gray); font-size:0.92rem; margin-bottom:12px; }
-.team-contact { list-style:none; display:grid; gap:8px; font-size:0.88rem; color:var(--navy); }
-.team-contact a { color:var(--navy); }
-.team-contact a:hover { color:var(--gold); }
-.team-socials { display:flex; gap:10px; margin-top:16px; }
-.team-socials a {
-  width:32px; height:32px; border-radius:50%; background:var(--cream); border:1px solid var(--gray-light);
-  display:flex; align-items:center; justify-content:center; font-size:0.8rem; font-weight:700; color:var(--navy);
-}
-.team-socials a:hover { background:var(--gold); color:var(--navy); }
-
-/* Testimonials */
-.testimonials { background:var(--navy); color:#fff; }
-.testimonials .section-header h2, .testimonials .section-header p { color:#fff; }
-.testimonials .section-header p { opacity:0.8; }
-.testimonials-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:28px; }
-.testimonial-card {
-  background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08);
-  border-radius:12px; padding:36px 32px;
-}
-.testimonial-text { font-size:1.05rem; line-height:1.7; margin-bottom:28px; font-style:italic; opacity:0.92; }
-.testimonial-author { display:flex; align-items:center; gap:14px; }
-.author-avatar { width:48px; height:48px; border-radius:50%; background-size:cover; background-position:center; }
-.author-info strong { display:block; font-size:0.98rem; }
-.author-info span { font-size:0.82rem; opacity:0.7; }
-
-/* FAQ */
-.faq { background:var(--cream); }
-.faq-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px; }
-.faq-item {
-  background:#fff; padding:24px 22px; border-radius:12px; box-shadow:var(--shadow);
-}
-.faq-item h3 { font-size:1.05rem; margin-bottom:10px; }
-.faq-item p { color:var(--gray); font-size:0.94rem; }
-
-/* Contact */
-.contact-grid { display:grid; grid-template-columns:1fr 1.3fr; gap:60px; }
-.contact-info h3 { font-size:1.5rem; margin-bottom:28px; }
-.contact-item { margin-bottom:26px; }
-.contact-item strong { display:block; margin-bottom:4px; font-size:0.95rem; }
-.contact-item span { color:var(--gray); font-size:0.95rem; }
-.contact-form { background:#fff; padding:40px; border-radius:12px; box-shadow:var(--shadow); }
-.form-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px; }
-.form-group { margin-bottom:16px; }
-.form-group label { display:block; font-size:0.82rem; font-weight:600; margin-bottom:6px; }
-.form-group input, .form-group select, .form-group textarea {
-  width:100%; padding:13px 15px; border:1.5px solid var(--gray-light); border-radius:7px;
-  font-size:0.95rem; font-family:inherit; outline:none; transition:border .25s;
-}
-.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color:var(--gold); }
-.form-group textarea { resize:vertical; min-height:120px; }
-.form-status {
-  display:none; margin-bottom:16px; padding:12px 14px; border-radius:8px; font-size:0.92rem; font-weight:500;
-}
-.form-status.success {
-  display:block; background:rgba(29,143,90,0.12); color:var(--success); border:1px solid rgba(29,143,90,0.2);
-}
-.form-status.error {
-  display:block; background:rgba(180,35,24,0.08); color:var(--error); border:1px solid rgba(180,35,24,0.2);
-}
-
-/* Footer */
-footer { background:#06101a; color:rgba(255,255,255,0.68); padding:60px 0 28px; }
-.footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:40px; margin-bottom:40px; }
-.footer-brand .logo { margin-bottom:16px; display:inline-block; }
-.footer-brand p { font-size:0.92rem; line-height:1.7; max-width:280px; }
-.footer-col h4 { color:#fff; margin-bottom:18px; font-size:1.05rem; }
-.footer-col ul { list-style:none; }
-.footer-col li { margin-bottom:10px; }
-.footer-col a { font-size:0.9rem; transition:color .25s; }
-.footer-col a:hover { color:var(--gold); }
-.footer-bottom { border-top:1px solid rgba(255,255,255,0.08); padding-top:24px; text-align:center; font-size:0.85rem; }
-
-/* Modal */
-.modal-overlay {
-  position:fixed; inset:0; background:rgba(8,17,28,0.88); display:none;
-  align-items:center; justify-content:center; z-index:2000; padding:24px; backdrop-filter:blur(6px);
-}
-.modal-overlay.active { display:flex; }
-.modal {
-  background:#fff; border-radius:14px; max-width:980px; width:100%; max-height:92vh;
-  overflow-y:auto; position:relative; animation:modalIn .35s ease;
-}
-@keyframes modalIn { from{opacity:0;transform:translateY(20px) scale(0.98);} to{opacity:1;transform:none;} }
-.modal-close {
-  position:absolute; top:16px; right:16px; width:40px; height:40px; background:#fff; border:none;
-  border-radius:50%; font-size:1.4rem; cursor:pointer; z-index:10; box-shadow:0 4px 16px rgba(0,0,0,0.15);
-}
-.modal-gallery { height:360px; background-size:cover; background-position:center; position:relative; }
-.gallery-nav {
-  position:absolute; top:50%; transform:translateY(-50%); width:42px; height:42px; background:#fff;
-  border:none; border-radius:50%; font-size:1.2rem; cursor:pointer; box-shadow:0 4px 14px rgba(0,0,0,0.15);
-}
-.gallery-prev { left:14px; } .gallery-next { right:14px; }
-.modal-body { padding:32px 36px 40px; }
-.modal-price { font-size:1.8rem; font-weight:600; color:var(--gold); margin-bottom:8px; }
-.modal-title { font-size:1.6rem; margin-bottom:8px; }
-.modal-location { color:var(--gray); margin-bottom:18px; }
-.modal-meta { display:flex; gap:32px; margin-bottom:22px; padding-bottom:22px; border-bottom:1px solid var(--gray-light); flex-wrap:wrap; }
-.modal-meta strong { display:block; font-size:1.15rem; }
-.modal-meta span { font-size:0.84rem; color:var(--gray); }
-.modal-layout { display:grid; grid-template-columns:1.4fr 0.9fr; gap:28px; align-items:start; }
-.modal-desc { color:var(--gray); margin-bottom:18px; line-height:1.75; }
-.modal-address { color:var(--navy); margin-bottom:12px; font-weight:600; }
-.modal-detailed-list { display:grid; gap:12px; margin:18px 0 22px; }
-.modal-detailed-list div { background:var(--cream); border:1px solid var(--gray-light); border-radius:8px; padding:12px 14px; }
-.modal-detailed-list strong { display:block; margin-bottom:4px; font-size:0.74rem; color:var(--gray); text-transform:uppercase; letter-spacing:0.08em; }
-.modal-detailed-list span { font-size:0.96rem; color:var(--navy); }
-.modal-amenities {
-  display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
-  gap:12px; margin:14px 0 28px; list-style:none;
-}
-.modal-amenities li {
-  background:var(--cream); border:1px solid var(--gray-light); border-radius:8px;
-  padding:12px 14px; color:var(--navy); font-size:0.9rem; font-weight:500;
-}
-.tour-link { display:inline-flex; margin-bottom:18px; color:var(--navy); font-weight:600; }
-.tour-link:hover { color:var(--gold); }
-.modal-side {
-  background:var(--cream); border:1px solid var(--gray-light); border-radius:12px; padding:22px;
-}
-.modal-side h4 { font-size:1.25rem; margin-bottom:10px; }
-.modal-side p { color:var(--gray); margin-bottom:16px; font-size:0.95rem; }
-.viewing-form .form-group { margin-bottom:12px; }
-.viewing-form input, .viewing-form textarea { width:100%; padding:12px 14px; border:1.5px solid var(--gray-light); border-radius:8px; font:inherit; }
-.viewing-form textarea { min-height:90px; resize:vertical; }
-.viewing-form button { width:100%; margin-top:8px; }
-.viewing-success {
-  display:none; margin-top:12px; background:rgba(29,143,90,0.12); color:var(--success); border:1px solid rgba(29,143,90,0.2); border-radius:8px; padding:10px 12px; font-size:0.9rem; font-weight:600;
-}
-.viewing-success.visible { display:block; }
-
-/* Back to top */
-.back-top {
-  position:fixed; bottom:32px; right:32px; width:48px; height:48px; background:var(--navy); color:#fff;
-  border:none; border-radius:50%; font-size:1.3rem; cursor:pointer; opacity:0; visibility:hidden;
-  transition:all .3s; box-shadow:0 8px 24px rgba(0,0,0,0.2); z-index:900;
-}
-.back-top.visible { opacity:1; visibility:visible; }
-
-/* WhatsApp */
-.whatsapp-float {
-  position:fixed; right:24px; bottom:24px; width:62px; height:62px; background:#25d366; color:#fff;
-  border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.05rem; font-weight:700;
-  box-shadow:0 12px 28px rgba(37, 211, 102, 0.35); z-index:3000; transition:transform .25s ease, box-shadow .25s ease;
-}
-.whatsapp-float:hover { transform:translateY(-2px); box-shadow:0 16px 32px rgba(37, 211, 102, 0.42); }
-
-/* Mobile */
-@media (max-width:960px) {
-  .hamburger { display:flex; }
-  .nav-links {
-    position:fixed; top:0; right:-100%; width:280px; height:100vh; background:var(--navy);
-    flex-direction:column; justify-content:flex-start; padding:100px 32px 40px; gap:0;
-    transition:right .35s; z-index:999; box-shadow:-10px 0 40px rgba(0,0,0,0.3);
-  }
-  .nav-links.active { right:0; }
-  .nav-links li { width:100%; border-bottom:1px solid rgba(255,255,255,0.08); }
-  .nav-links a { display:block; padding:16px 0; font-size:1.05rem; }
-  .nav-cta { margin-top:16px; text-align:center; display:block!important; }
-  .about-grid, .contact-grid, .footer-grid, .modal-layout { grid-template-columns:1fr; }
-  .about-img { height:360px; }
-  .form-row { grid-template-columns:1fr; }
-  .filters-bar { flex-direction:column; align-items:stretch; }
-  .filter-reset { margin-left:0; width:100%; }
-  .stats { flex-wrap:wrap; gap:24px; }
-}
-@media (max-width:640px) {
-  .properties-grid { grid-template-columns:1fr; }
-  .modal-gallery { height:260px; }
-  .whatsapp-float { width:56px; height:56px; right:18px; bottom:18px; }
-}
-</style>
-</head>
-<body>
-
-<header id="header">
-  <nav class="container">
-    <a href="#home" class="logo">Aether<span>Homes</span></a>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#home">Home</a></li>
-      <li><a href="#properties">Properties</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#team">Team</a></li>
-      <li><a href="#testimonials">Testimonials</a></li>
-      <li><a href="#contact" class="nav-cta">Contact</a></li>
-    </ul>
-    <div class="hamburger" id="hamburger" aria-label="Toggle navigation menu" role="button" tabindex="0"><span></span><span></span><span></span></div>
-  </nav>
-</header>
-
-<!-- HERO with rotating images -->
-<section class="hero" id="home">
-  <div class="hero-slides">
-    <div class="hero-slide active" style="background-image:url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1920&q=85')"></div>
-    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1920&q=85')"></div>
-    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=85')"></div>
-    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=1920&q=85')"></div>
-    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1920&q=85')"></div>
-  </div>
-  <div class="hero-overlay"></div>
-  <div class="container">
-    <div class="hero-content">
-      <div class="hero-badge">Premium Real Estate</div>
-      <h1>Exceptional Homes.<br>Timeless Living.</h1>
-      <p>Curated residences in Nigeria's most prestigious locations for those who refuse to settle.</p>
-      <div class="hero-btns">
-        <a href="#properties" class="btn btn-gold">Explore Properties</a>
-        <a href="#contact" class="btn btn-outline">Speak to an Advisor</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PROPERTIES -->
-<section id="properties">
-  <div class="container">
-    <div class="section-header">
-      <h2>Featured Properties</h2>
-      <div class="gold-line"></div>
-      <p>A carefully selected collection of exceptional residences</p>
-    </div>
-    <div class="filters-bar">
-      <div class="filter-group">
-        <label for="filterType">Type</label>
-        <select id="filterType" aria-label="Filter properties by type">
-          <option value="">All Types</option>
-          <option value="House">House</option>
-          <option value="Apartment">Apartment</option>
-          <option value="Villa">Villa</option>
-          <option value="Townhouse">Townhouse</option>
-        </select>
-      </div>
-      <div class="filter-group">
-        <label for="filterLocation">Location</label>
-        <select id="filterLocation" aria-label="Filter properties by location">
-          <option value="">All Locations</option>
-          <option value="Lagos">Lagos</option>
-          <option value="Abuja">Abuja</option>
-          <option value="Port Harcourt">Port Harcourt</option>
-          <option value="Ibadan">Ibadan</option>
-        </select>
-      </div>
-      <div class="filter-group">
-        <label for="filterMinPrice">Min Price</label>
-        <select id="filterMinPrice" aria-label="Minimum property price">
-          <option value="">Any</option>
-          <option value="50000000">₦50m+</option>
-          <option value="75000000">₦75m+</option>
-          <option value="100000000">₦100m+</option>
-          <option value="200000000">₦200m+</option>
-          <option value="300000000">₦300m+</option>
-        </select>
-      </div>
-      <div class="filter-group">
-        <label for="filterMaxPrice">Max Price</label>
-        <select id="filterMaxPrice" aria-label="Maximum property price">
-          <option value="">Any</option>
-          <option value="100000000">₦100m</option>
-          <option value="200000000">₦200m</option>
-          <option value="300000000">₦300m</option>
-          <option value="500000000">₦500m</option>
-        </select>
-      </div>
-      <div class="filter-group">
-        <label for="filterBeds">Bedrooms</label>
-        <select id="filterBeds" aria-label="Filter properties by bedroom count">
-          <option value="">Any</option>
-          <option value="3">3+</option>
-          <option value="4">4+</option>
-          <option value="5">5+</option>
-          <option value="6">6+</option>
-        </select>
-      </div>
-      <div class="filter-group">
-        <label for="filterSort">Sort</label>
-        <select id="filterSort" aria-label="Sort properties">
-          <option value="featured">Featured</option>
-          <option value="price-asc">Price: Low to High</option>
-          <option value="price-desc">Price: High to Low</option>
-        </select>
-      </div>
-      <button type="button" class="filter-reset" onclick="resetFilters()">Reset</button>
-    </div>
-    <div class="properties-grid" id="propertiesGrid"></div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section class="about" id="about">
-  <div class="container">
-    <div class="about-grid">
-      <div class="about-img"></div>
-      <div class="about-content">
-        <h2>A Legacy of Excellence</h2>
-        <p>For over two decades, Aether Homes has been the trusted partner for discerning clients seeking exceptional properties across Nigeria's premier locations.</p>
-        <p>We combine deep market knowledge with an unwavering commitment to quality, privacy, and personalized service — ensuring every client finds not just a house, but a home that reflects their ambitions and lifestyle.</p>
-        <div class="stats">
-          <div class="stat"><h3>850+</h3><p>Properties Sold</p></div>
-          <div class="stat"><h3>22</h3><p>Years Experience</p></div>
-          <div class="stat"><h3>98%</h3><p>Client Satisfaction</p></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SERVICES -->
-<section id="services">
-  <div class="container">
-    <div class="section-header">
-      <h2>Our Services</h2>
-      <div class="gold-line"></div>
-      <p>Comprehensive real estate solutions tailored to your needs</p>
-    </div>
-    <div class="services-grid">
-      <div class="service-card">
-        <div class="service-icon">🏠</div>
-        <h3>Property Sales</h3>
-        <p>Expert guidance through every step of buying or selling with maximum value and minimal stress.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon">🔑</div>
-        <h3>Luxury Rentals</h3>
-        <p>Curated selection of premium short and long-term rentals in exclusive neighborhoods.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon">📐</div>
-        <h3>Property Management</h3>
-        <p>Full-service management ensuring your investment is maintained to the highest standards.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon">📊</div>
-        <h3>Investment Advisory</h3>
-        <p>Strategic insights and market analysis to help you make informed investment decisions.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- TEAM -->
-<section id="team">
-  <div class="container">
-    <div class="section-header">
-      <h2>Our Team</h2>
-      <div class="gold-line"></div>
-      <p>Meet the advisors and specialists behind our client-first approach.</p>
-    </div>
-    <div class="team-grid">
-      <div class="team-card">
-        <div class="team-photo" style="background-image:url('https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80')"></div>
-        <div class="team-info">
-          <h3>Daniel Adebayo</h3>
-          <div class="team-role">Managing Director</div>
-          <p class="team-specialty">Luxury homes, portfolio strategy, and high-end acquisition advisory.</p>
-          <ul class="team-contact">
-            <li><a href="tel:+2348012345678">+234 801 234 5678</a></li>
-            <li><a href="mailto:daniel@aetherhomes.com">daniel@aetherhomes.com</a></li>
-          </ul>
-          <div class="team-socials">
-            <a href="https://www.linkedin.com" target="_blank" rel="noopener" aria-label="Daniel Adebayo on LinkedIn">in</a>
-            <a href="https://www.instagram.com" target="_blank" rel="noopener" aria-label="Daniel Adebayo on Instagram">ig</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="team-card">
-        <div class="team-photo" style="background-image:url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=80')"></div>
-        <div class="team-info">
-          <h3>Amara Okafor</h3>
-          <div class="team-role">Head of Sales</div>
-          <p class="team-specialty">Buyer representation, negotiation, and bespoke residential guidance.</p>
-          <ul class="team-contact">
-            <li><a href="tel:+2348098765432">+234 809 876 5432</a></li>
-            <li><a href="mailto:amara@aetherhomes.com">amara@aetherhomes.com</a></li>
-          </ul>
-          <div class="team-socials">
-            <a href="https://www.linkedin.com" target="_blank" rel="noopener" aria-label="Amara Okafor on LinkedIn">in</a>
-            <a href="https://www.instagram.com" target="_blank" rel="noopener" aria-label="Amara Okafor on Instagram">ig</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="team-card">
-        <div class="team-photo" style="background-image:url('https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=900&q=80')"></div>
-        <div class="team-info">
-          <h3>Michael Iwuala</h3>
-          <div class="team-role">Property Consultant</div>
-          <p class="team-specialty">Mixed-use investment opportunities and rental market strategy.</p>
-          <ul class="team-contact">
-            <li><a href="tel:+2348065432187">+234 806 543 2187</a></li>
-            <li><a href="mailto:michael@aetherhomes.com">michael@aetherhomes.com</a></li>
-          </ul>
-          <div class="team-socials">
-            <a href="https://www.linkedin.com" target="_blank" rel="noopener" aria-label="Michael Iwuala on LinkedIn">in</a>
-            <a href="https://www.instagram.com" target="_blank" rel="noopener" aria-label="Michael Iwuala on Instagram">ig</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="team-card">
-        <div class="team-photo" style="background-image:url('https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=900&q=80')"></div>
-        <div class="team-info">
-          <h3>Rachel Eze</h3>
-          <div class="team-role">Client Relations Lead</div>
-          <p class="team-specialty">End-to-end client support, viewing coordination, and after-sale care.</p>
-          <ul class="team-contact">
-            <li><a href="tel:+2348034567890">+234 803 456 7890</a></li>
-            <li><a href="mailto:rachel@aetherhomes.com">rachel@aetherhomes.com</a></li>
-          </ul>
-          <div class="team-socials">
-            <a href="https://www.linkedin.com" target="_blank" rel="noopener" aria-label="Rachel Eze on LinkedIn">in</a>
-            <a href="https://www.instagram.com" target="_blank" rel="noopener" aria-label="Rachel Eze on Instagram">ig</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section class="testimonials" id="testimonials">
-  <div class="container">
-    <div class="section-header">
-      <h2>Client Stories</h2>
-      <div class="gold-line"></div>
-      <p>What our clients say about working with us</p>
-    </div>
-    <div class="testimonials-grid">
-      <div class="testimonial-card">
-        <p class="testimonial-text">"Aether Homes made the entire process effortless. Their attention to detail and understanding of what we truly wanted was exceptional."</p>
-        <div class="testimonial-author">
-          <div class="author-avatar" style="background-image:url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80')"></div>
-          <div class="author-info"><strong>Chinedu Okonkwo</strong><span>Purchased Villa in Lagos</span></div>
-        </div>
-      </div>
-      <div class="testimonial-card">
-        <p class="testimonial-text">"Professional, discreet, and incredibly knowledgeable. We found our dream home in Abuja within weeks."</p>
-        <div class="testimonial-author">
-          <div class="author-avatar" style="background-image:url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80')"></div>
-          <div class="author-info"><strong>Amara Eze</strong><span>Purchased Penthouse in Abuja</span></div>
-        </div>
-      </div>
-      <div class="testimonial-card">
-        <p class="testimonial-text">"From the first viewing to closing, the team was outstanding. Highly recommended for serious buyers."</p>
-        <div class="testimonial-author">
-          <div class="author-avatar" style="background-image:url('https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=100&q=80')"></div>
-          <div class="author-info"><strong>Tunde Bakare</strong><span>Sold Estate in Port Harcourt</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FAQ -->
-<section class="faq" id="faq">
-  <div class="container">
-    <div class="section-header">
-      <h2>Frequently Asked Questions</h2>
-      <div class="gold-line"></div>
-      <p>Everything you need to know before buying, selling, or renting</p>
-    </div>
-    <div class="faq-grid">
-      <div class="faq-item">
-        <h3>What documents are required to purchase a property?</h3>
-        <p>Usually, buyers need a valid ID, proof of address, bank statements, and, depending on the transaction, a purchase offer and proof of funds.</p>
-      </div>
-      <div class="faq-item">
-        <h3>Do you offer property inspections?</h3>
-        <p>Yes. We arrange guided inspections, condition reviews, and neighborhood checks so clients can make informed decisions.</p>
-      </div>
-      <div class="faq-item">
-        <h3>Do you help clients living abroad?</h3>
-        <p>Absolutely. We support remote buyers with virtual tours, secure document handling, and dedicated advisory throughout the process.</p>
-      </div>
-      <div class="faq-item">
-        <h3>How long does the buying process usually take?</h3>
-        <p>It varies by property and documentation, but many transactions are completed in 2 to 8 weeks with the right preparation.</p>
-      </div>
-      <div class="faq-item">
-        <h3>Do you manage rental properties?</h3>
-        <p>Yes. We provide tenant placement, rent collection, property maintenance coordination, and full property management support.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="container">
-    <div class="section-header">
-      <h2>Get In Touch</h2>
-      <div class="gold-line"></div>
-      <p>Ready to find your next home? Let's start the conversation.</p>
-    </div>
-    <div class="contact-grid">
-      <div class="contact-info">
-        <h3>Contact Information</h3>
-        <div class="contact-item"><strong>Address</strong><span>12 Admiralty Way, Lekki Phase 1<br>Lagos, Nigeria</span></div>
-        <div class="contact-item"><strong>Phone</strong><span>+234 801 234 5678</span></div>
-        <div class="contact-item"><strong>Email</strong><span>hello@aetherhomes.com</span></div>
-        <div class="contact-item"><strong>Hours</strong><span>Mon – Fri: 9am – 6pm<br>Sat: 10am – 4pm</span></div>
-      </div>
-      <form class="contact-form" id="contactForm" name="Aether Homes Contact" method="POST" action="https://formspree.io/f/your-form-id" accept-charset="UTF-8">
-        <input type="hidden" name="form-name" value="Aether Homes Contact" />
-        <input type="hidden" name="bot-field" />
-
-        <div class="form-status" id="formSuccess" role="status" aria-live="polite">Thank you! Your message has been received and our team will contact you within 24 hours.</div>
-        <div class="form-status" id="formError" role="alert" aria-live="assertive">There was a problem sending your message. Please try again or contact us directly by phone or email.</div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="firstName">First Name</label>
-            <input id="firstName" name="firstName" type="text" required placeholder="John">
-          </div>
-          <div class="form-group">
-            <label for="lastName">Last Name</label>
-            <input id="lastName" name="lastName" type="text" required placeholder="Doe">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input id="email" name="email" type="email" required placeholder="john@example.com">
-        </div>
-        <div class="form-group">
-          <label for="phone">Phone</label>
-          <input id="phone" name="phone" type="tel" placeholder="+234 800 000 0000">
-        </div>
-        <div class="form-group">
-          <label for="interest">Interest</label>
-          <select id="interest" name="interest">
-            <option>Buying a property</option>
-            <option>Selling a property</option>
-            <option>Renting</option>
-            <option>Investment advice</option>
-            <option>Other</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="message">Message</label>
-          <textarea id="message" name="message" placeholder="Tell us about your requirements..."></textarea>
-        </div>
-        <button type="submit" class="btn btn-gold" id="submitButton">Send Message</button>
-      </form>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="#home" class="logo">Aether<span>Homes</span></a>
-        <p>Premium real estate solutions for those who expect excellence. Serving Nigeria's most discerning clients since 2004.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Explore</h4>
-        <ul>
-          <li><a href="#properties">Properties</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Services</h4>
-        <ul>
-          <li><a href="#services">Property Sales</a></li>
-          <li><a href="#services">Luxury Rentals</a></li>
-          <li><a href="#services">Management</a></li>
-          <li><a href="#services">Advisory</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Contact</h4>
-        <ul>
-          <li>12 Admiralty Way, Lekki</li>
-          <li>+234 801 234 5678</li>
-          <li>hello@aetherhomes.com</li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom"><p>© 2026 Aether Homes. All rights reserved.</p></div>
-  </div>
-</footer>
-
-<!-- Modal -->
-<div class="modal-overlay" id="modal">
-  <div class="modal">
-    <button class="modal-close" id="modalClose" aria-label="Close property details">×</button>
-    <div class="modal-gallery" id="modalGallery">
-      <button class="gallery-nav gallery-prev" id="galleryPrev" aria-label="Previous property image">‹</button>
-      <button class="gallery-nav gallery-next" id="galleryNext" aria-label="Next property image">›</button>
-    </div>
-    <div class="modal-body">
-      <div class="modal-price" id="modalPrice"></div>
-      <h3 class="modal-title" id="modalTitle"></h3>
-      <div class="modal-location" id="modalLocation"></div>
-      <div class="modal-meta" id="modalMeta"></div>
-      <div class="modal-layout">
-        <div>
-          <div class="modal-address" id="modalAddress"></div>
-          <p class="modal-desc" id="modalDesc"></p>
-          <div class="modal-detailed-list" id="modalDetails"></div>
-          <a class="tour-link" id="virtualTourLink" href="#" target="_blank" rel="noopener">View virtual tour →</a>
-          <ul class="modal-amenities" id="modalAmenities"></ul>
-        </div>
-        <aside class="modal-side">
-          <h4>Schedule a Viewing</h4>
-          <p>Tell us your preferred date and our advisor will contact you to confirm.</p>
-          <form class="viewing-form" id="viewingForm">
-            <input type="hidden" id="viewingProperty" name="property" value="">
-            <div class="form-group">
-              <label for="viewingName">Full name</label>
-              <input id="viewingName" name="name" type="text" required placeholder="Your name">
-            </div>
-            <div class="form-group">
-              <label for="viewingEmail">Email</label>
-              <input id="viewingEmail" name="email" type="email" required placeholder="you@example.com">
-            </div>
-            <div class="form-group">
-              <label for="viewingDate">Preferred date</label>
-              <input id="viewingDate" name="date" type="date" required>
-            </div>
-            <div class="form-group">
-              <label for="viewingMessage">Notes</label>
-              <textarea id="viewingMessage" name="message" placeholder="Tell us what you are looking for..."></textarea>
-            </div>
-            <button type="submit" class="btn btn-gold">Request Viewing</button>
-          </form>
-          <div class="viewing-success" id="viewingSuccess">Your viewing request has been received. Our team will contact you shortly.</div>
-        </aside>
-      </div>
-    </div>
-  </div>
-</div>
-
-<button class="back-top" id="backTop" aria-label="Back to top">↑</button>
-<a class="whatsapp-float" href="https://wa.me/2348012345678?text=Hello%20Aether%20Homes%2C%20I%20am%20interested%20in%20a%20property" target="_blank" rel="noopener" aria-label="Chat with Aether Homes on WhatsApp">WhatsApp</a>
-
-<script>
-// ========== DATA ==========
-const properties = [
-  {id:1,title:"Oceanview Villa",type:"Villa",price:285000000,location:"Lagos",neighborhood:"Lekki Phase 1",address:"45 Oceanview Drive, Lekki Phase 1, Lagos",beds:5,baths:6,area:680,
-   images:["https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=85"],
-   badge:"Featured",desc:"Exquisite waterfront villa with panoramic ocean views, private pool, and smart home technology designed for refined coastal living.",
-   amenities:["Private Pool","Smart Home System","Security Gate","Guest House","Garden Lounge"],
-   parking:4, yearBuilt:2019, furnishing:"Fully Furnished", virtualTour:"https://www.google.com/maps?q=Lekki+Phase+1+Lagos"},
-  {id:2,title:"Modern Penthouse",type:"Apartment",price:145000000,location:"Abuja",neighborhood:"Wuse District",address:"18 Suleiman Avenue, Wuse District, Abuja",beds:4,baths:4,area:320,
-   images:["https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=900&q=85"],
-   badge:"New",desc:"Stunning penthouse with floor-to-ceiling windows and a private terrace, offering exceptional city views and walkable proximity to key business districts.",
-   amenities:["Terrace","Concierge","Gym Access","EV Charging","City View"],
-   parking:2, yearBuilt:2022, furnishing:"Semi-Furnished", virtualTour:"https://www.google.com/maps?q=Wuse+District+Abuja"},
-  {id:3,title:"Colonial Estate",type:"House",price:320000000,location:"Lagos",neighborhood:"Ikoyi",address:"9 Bourdillon Road, Ikoyi, Lagos",beds:6,baths:7,area:850,
-   images:["https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=900&q=85"],
-   badge:"Exclusive",desc:"Timeless colonial architecture on expansive grounds, complete with a guest house, tennis court, and carefully landscaped outdoor spaces.",
-   amenities:["Tennis Court","Guest House","Staff Quarters","Landscape Garden","Home Office"],
-   parking:5, yearBuilt:2015, furnishing:"Fully Furnished", virtualTour:"https://www.google.com/maps?q=Ikoyi+Lagos"},
-  {id:4,title:"Garden Townhouse",type:"Townhouse",price:95000000,location:"Port Harcourt",neighborhood:"GRA",address:"7 Silverline Estate, GRA, Port Harcourt",beds:3,baths:3,area:210,
-   images:["https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=900&q=85"],
-   badge:"For Sale",desc:"Beautifully maintained townhouse in a secure gated community with a private garden, ideal for a relaxed lifestyle in a premium neighborhood.",
-   amenities:["Private Garden","Covered Parking","Play Area","Security Patrol","Backyard"],
-   parking:2, yearBuilt:2018, furnishing:"Unfurnished", virtualTour:"https://www.google.com/maps?q=GRA+Port+Harcourt"},
-  {id:5,title:"Skyline Apartment",type:"Apartment",price:78000000,location:"Lagos",neighborhood:"Victoria Island",address:"12 Oke Ado Close, Victoria Island, Lagos",beds:3,baths:3,area:185,
-   images:["https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=900&q=85"],
-   badge:"Hot",desc:"Bright contemporary apartment with city views and premium building amenities, perfectly balanced for urban convenience and comfort.",
-   amenities:["Water Front","Pool Deck","Gym","Lift Access","24/7 Security"],
-   parking:1, yearBuilt:2021, furnishing:"Semi-Furnished", virtualTour:"https://www.google.com/maps?q=Victoria+Island+Lagos"},
-  {id:6,title:"Riverside Villa",type:"Villa",price:410000000,location:"Abuja",neighborhood:"Jabi",address:"40 Riverstone Crescent, Jabi, Abuja",beds:7,baths:8,area:920,
-   images:["https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=85"],
-   badge:"Luxury",desc:"Ultra-luxury riverside estate with an infinity pool, home cinema, and wine cellar, created for high-end living and entertaining.",
-   amenities:["Infinity Pool","Cinema Room","Wine Cellar","Riverside Views","Lawn & Patio"],
-   parking:6, yearBuilt:2023, furnishing:"Fully Furnished", virtualTour:"https://www.google.com/maps?q=Jabi+Abuja"}
-];
-
-let favorites = JSON.parse(localStorage.getItem('aetherFavs') || '[]');
-let currentGallery = [];
-let currentImgIndex = 0;
-
-// ========== HERO IMAGE ROTATION ==========
-const slides = document.querySelectorAll('.hero-slide');
-let currentSlide = 0;
-setInterval(() => {
-  slides[currentSlide].classList.remove('active');
-  currentSlide = (currentSlide + 1) % slides.length;
-  slides[currentSlide].classList.add('active');
-}, 5000);
-
-// ========== RENDER PROPERTIES ==========
-function formatPrice(p) { return '₦' + p.toLocaleString(); }
-
-function renderProperties(list) {
-  const grid = document.getElementById('propertiesGrid');
-  if (!list.length) {
-    grid.innerHTML = `<div class="empty-state"><h3>No properties match your filters</h3><p>Try adjusting or reset the filters.</p></div>`;
-    return;
-  }
-  grid.innerHTML = list.map(p => `
-    <div class="property-card" onclick="openModal(${p.id})">
-      <div class="property-img" style="background-image:url('${p.images[0]}')">
-        <span class="property-badge">${p.badge}</span>
-        <button class="fav-btn ${favorites.includes(p.id) ? 'active' : ''}" 
-                onclick="event.stopPropagation(); toggleFav(${p.id}, this)" aria-label="Save ${p.title} to favorites">
-          ${favorites.includes(p.id) ? '♥' : '♡'}
-        </button>
-      </div>
-      <div class="property-info">
-        <div class="property-price">${formatPrice(p.price)}</div>
-        <h3 class="property-title">${p.title}</h3>
-        <div class="property-location">📍 ${p.location}</div>
-        <div class="property-meta">
-          <span>🛏 ${p.beds}</span>
-          <span>🛁 ${p.baths}</span>
-          <span>📐 ${p.area}m²</span>
-        </div>
-      </div>
-    </div>
-  `).join('');
-}
-
-// ========== FILTERS ==========
-function applyFilters() {
-  let list = [...properties];
-  const type = document.getElementById('filterType').value;
-  const loc = document.getElementById('filterLocation').value;
-  const minPrice = Number(document.getElementById('filterMinPrice').value || 0);
-  const maxPrice = Number(document.getElementById('filterMaxPrice').value || Infinity);
-  const beds = document.getElementById('filterBeds').value;
-  const sort = document.getElementById('filterSort').value;
-
-  if (type) list = list.filter(p => p.type === type);
-  if (loc) list = list.filter(p => p.location === loc);
-  if (minPrice) list = list.filter(p => p.price >= minPrice);
-  if (maxPrice && maxPrice !== Infinity) list = list.filter(p => p.price <= maxPrice);
-  if (beds) list = list.filter(p => p.beds >= +beds);
-  if (sort === 'price-asc') list.sort((a,b) => a.price - b.price);
-  else if (sort === 'price-desc') list.sort((a,b) => b.price - a.price);
-  renderProperties(list);
-}
-
-function resetFilters() {
-  document.getElementById('filterType').value = '';
-  document.getElementById('filterLocation').value = '';
-  document.getElementById('filterMinPrice').value = '';
-  document.getElementById('filterMaxPrice').value = '';
-  document.getElementById('filterBeds').value = '';
-  document.getElementById('filterSort').value = 'featured';
-  renderProperties(properties);
-}
-
-['filterType','filterLocation','filterMinPrice','filterMaxPrice','filterBeds','filterSort'].forEach(id => {
-  document.getElementById(id).addEventListener('change', applyFilters);
-});
-
-// ========== FAVORITES ==========
-function toggleFav(id, btn) {
-  if (favorites.includes(id)) {
-    favorites = favorites.filter(f => f !== id);
-    btn.classList.remove('active');
-    btn.innerHTML = '♡';
-  } else {
-    favorites.push(id);
-    btn.classList.add('active');
-    btn.innerHTML = '♥';
-  }
-  localStorage.setItem('aetherFavs', JSON.stringify(favorites));
-}
-
-// ========== MODAL ==========
-function openModal(id) {
-  const p = properties.find(x => x.id === id);
-  currentGallery = p.images;
-  currentImgIndex = 0;
-  document.getElementById('modalPrice').textContent = formatPrice(p.price);
-  document.getElementById('modalTitle').textContent = p.title;
-  document.getElementById('modalLocation').textContent = `📍 ${p.neighborhood} · ${p.location}`;
-  document.getElementById('modalAddress').textContent = p.address;
-  document.getElementById('modalMeta').innerHTML = `
-    <div><strong>${p.beds}</strong><span>Bedrooms</span></div>
-    <div><strong>${p.baths}</strong><span>Bathrooms</span></div>
-    <div><strong>${p.area}m²</strong><span>Area</span></div>
-    <div><strong>${p.parking}</strong><span>Parking</span></div>
-    <div><strong>${p.yearBuilt}</strong><span>Year Built</span></div>
-    <div><strong>${p.furnishing}</strong><span>Furnishing</span></div>`;
-  document.getElementById('modalDesc').textContent = p.desc;
-  document.getElementById('modalDetails').innerHTML = `
-    <div><strong>Property Type</strong><span>${p.type}</span></div>
-    <div><strong>Neighborhood</strong><span>${p.neighborhood}</span></div>
-    <div><strong>Listing Status</strong><span>Available for viewing</span></div>`;
-  document.getElementById('modalAmenities').innerHTML = p.amenities.map(item => `<li>${item}</li>`).join('');
-  const virtualTourLink = document.getElementById('virtualTourLink');
-  virtualTourLink.href = p.virtualTour;
-  virtualTourLink.setAttribute('aria-label', `View virtual tour for ${p.title}`);
-  document.getElementById('viewingProperty').value = p.title;
-  document.getElementById('viewingSuccess').classList.remove('visible');
-  updateGallery();
-  document.getElementById('modal').classList.add('active');
-  document.body.style.overflow = 'hidden';
-}
-
-function updateGallery() {
-  document.getElementById('modalGallery').style.backgroundImage = `url('${currentGallery[currentImgIndex]}')`;
-}
-
-document.getElementById('galleryPrev').onclick = e => {
-  e.stopPropagation();
-  currentImgIndex = (currentImgIndex - 1 + currentGallery.length) % currentGallery.length;
-  updateGallery();
-};
-document.getElementById('galleryNext').onclick = e => {
-  e.stopPropagation();
-  currentImgIndex = (currentImgIndex + 1) % currentGallery.length;
-  updateGallery();
-};
-
-function closeModal() {
-  document.getElementById('modal').classList.remove('active');
-  document.body.style.overflow = '';
-}
-document.getElementById('modalClose').onclick = closeModal;
-document.getElementById('modal').onclick = e => { if (e.target.id === 'modal') closeModal(); };
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-
-// ========== CONTACT ==========
-const contactForm = document.getElementById('contactForm');
-const formSuccess = document.getElementById('formSuccess');
-const formError = document.getElementById('formError');
-const submitButton = document.getElementById('submitButton');
-
-contactForm.addEventListener('submit', async (e) => {
-  e.preventDefault();
-
-  formSuccess.style.display = 'none';
-  formSuccess.classList.remove('success');
-  formError.style.display = 'none';
-  formError.classList.remove('error');
-
-  submitButton.disabled = true;
-  submitButton.textContent = 'Sending...';
-
-  const formData = new FormData(contactForm);
-  const targetUrl = contactForm.action || '/';
-
-  try {
-    const response = await fetch(targetUrl, {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'X-Requested-With': 'XMLHttpRequest'
-      },
-      body: formData
-    });
-
-    if (!response.ok) {
-      throw new Error('Submission failed');
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aether Homes | Premium Real Estate</title>
+  <meta name="description" content="Aether Homes offers premium real estate, luxury homes, property management, and investment advisory services across Nigeria.">
+  <meta name="theme-color" content="#0a1525">
+  <meta property="og:title" content="Aether Homes | Premium Real Estate">
+  <meta property="og:description" content="Curated residences in Nigeria's most prestigious locations for those who refuse to settle.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://aetherhomes.com">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80">
+  <link rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a1525'/%3E%3Cpath d='M16 16h32v32H16z' fill='none'/%3E%3Cpath d='M18 38h28v6H18zm4-18h20v8H22zm4 12h12v8H26z' fill='%23c9a227'/%3E%3C/svg%3E">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script defer data-domain="aetherhomes.com" src="https://plausible.io/js/script.js"></script>
+  <style>
+    :root {
+      --navy: #0a1525;
+      --navy-mid: #122033;
+      --gold: #c9a227;
+      --gold-light: #e0b93a;
+      --cream: #f8f5f0;
+      --white: #ffffff;
+      --gray: #5a6a7a;
+      --gray-light: #e6eaef;
+      --shadow: 0 12px 40px rgba(10,21,37,0.08);
+      --shadow-hover: 0 24px 50px rgba(10,21,37,0.14);
+      --success: #1d8f5a;
+      --error: #b42318;
+      --green: #25d366;
+      --blue: #1a73e8;
     }
 
-    contactForm.reset();
-    formSuccess.style.display = 'block';
-    formSuccess.classList.add('success');
-  } catch (error) {
-    formError.style.display = 'block';
-    formError.classList.add('error');
-  } finally {
-    submitButton.disabled = false;
-    submitButton.textContent = 'Send Message';
-  }
-});
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--navy);
+      background: var(--cream);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1,h2,h3,h4 { font-family: 'Playfair Display', serif; font-weight: 600; line-height: 1.2; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+    button, input, select, textarea { font: inherit; }
+    .container { max-width: 1240px; margin: 0 auto; padding: 0 28px; }
 
-const viewingForm = document.getElementById('viewingForm');
-const viewingSuccess = document.getElementById('viewingSuccess');
+    header {
+      position: fixed;
+      top: 0; left: 0; width: 100%;
+      z-index: 1000;
+      background: rgba(10, 21, 37, 0.94);
+      backdrop-filter: blur(16px);
+      transition: all .35s ease;
+    }
+    header.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.25); }
+    nav {
+      display: flex; justify-content: space-between; align-items: center;
+      height: 84px;
+    }
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.55rem; font-weight: 600; color: #fff;
+    }
+    .logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
+    .nav-links a {
+      color: rgba(255,255,255,0.88);
+      font-size: 0.92rem; font-weight: 500;
+      transition: color .25s ease;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta {
+      background: var(--gold) !important;
+      color: var(--navy) !important;
+      padding: 11px 22px;
+      border-radius: 5px;
+      font-weight: 600;
+    }
+    .nav-cta:hover { background: var(--gold-light) !important; }
 
-viewingForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const propertyName = document.getElementById('viewingProperty').value;
-  viewingSuccess.textContent = `Thanks! Your viewing request for ${propertyName} has been received. We will contact you shortly.`;
-  viewingSuccess.classList.add('visible');
-  viewingForm.reset();
-});
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center; gap: 6px;
+      width: 32px; height: 32px; cursor: pointer; z-index: 1001;
+    }
+    .hamburger span {
+      display: block; width: 100%; height: 2px; background: #fff; border-radius: 2px; transition: all .3s ease;
+    }
+    .hamburger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
-// ========== HAMBURGER ==========
-const hamburger = document.getElementById('hamburger');
-const navLinks = document.getElementById('navLinks');
-hamburger.onclick = () => {
-  hamburger.classList.toggle('active');
-  navLinks.classList.toggle('active');
-};
-hamburger.onkeydown = (e) => {
-  if (e.key === 'Enter' || e.key === ' ') {
-    e.preventDefault();
-    hamburger.click();
-  }
-};
-document.querySelectorAll('.nav-links a').forEach(a => {
-  a.onclick = () => {
-    hamburger.classList.remove('active');
-    navLinks.classList.remove('active');
-  };
-});
-document.addEventListener('click', e => {
-  if (!navLinks.contains(e.target) && !hamburger.contains(e.target)) {
-    hamburger.classList.remove('active');
-    navLinks.classList.remove('active');
-  }
-});
+    .hero {
+      height: 100vh;
+      min-height: 700px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      color: #fff;
+      text-align: center;
+      overflow: hidden;
+    }
+    .hero-slides { position: absolute; inset: 0; }
+    .hero-slide {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+      opacity: 0; transition: opacity 1.4s ease;
+    }
+    .hero-slide.active { opacity: 1; }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(10,21,37,0.78), rgba(10,21,37,0.55));
+      z-index: 1;
+    }
+    .hero-content { position: relative; z-index: 2; max-width: 820px; margin: 0 auto; }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(201,162,39,0.2);
+      border: 1px solid rgba(201,162,39,0.45);
+      color: var(--gold-light);
+      padding: 6px 18px; border-radius: 30px;
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    .hero h1 {
+      font-size: clamp(2.8rem, 5.5vw, 4.3rem);
+      margin-bottom: 20px; letter-spacing: -0.5px;
+    }
+    .hero p {
+      font-size: 1.18rem;
+      opacity: 0.9; margin-bottom: 40px;
+      font-weight: 300; max-width: 560px; margin-left: auto; margin-right: auto;
+    }
+    .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-block;
+      padding: 15px 32px;
+      border-radius: 7px;
+      font-weight: 600; font-size: 0.95rem;
+      cursor: pointer; transition: all .25s ease;
+      border: none;
+    }
+    .btn-gold { background: var(--gold); color: var(--navy); }
+    .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .btn-outline {
+      background: transparent; color: #fff;
+      border: 1.5px solid rgba(255,255,255,0.5);
+    }
+    .btn-outline:hover { border-color: #fff; background: rgba(255,255,255,0.1); }
 
-// ========== HEADER + BACK TO TOP ==========
-const header = document.getElementById('header');
-const backTop = document.getElementById('backTop');
-window.addEventListener('scroll', () => {
-  header.classList.toggle('scrolled', window.scrollY > 60);
-  backTop.classList.toggle('visible', window.scrollY > 500);
-});
-backTop.onclick = () => window.scrollTo({ top:0, behavior:'smooth' });
+    section { padding: 100px 0; }
+    .section-header { text-align: center; margin-bottom: 56px; }
+    .section-header h2 { font-size: clamp(2.1rem, 3.5vw, 2.7rem); margin-bottom: 14px; }
+    .section-header p { color: var(--gray); max-width: 520px; margin: 0 auto; }
+    .gold-line { width: 52px; height: 3px; background: var(--gold); margin: 18px auto 0; }
 
-// ========== INIT ==========
-renderProperties(properties);
-</script>
+    .filters-bar {
+      background: #fff; border-radius: 12px; padding: 18px 22px;
+      display: flex; flex-wrap: wrap; gap: 14px; align-items: center;
+      margin-bottom: 40px; box-shadow: var(--shadow);
+    }
+    .filter-group { display: flex; flex-direction: column; gap: 4px; }
+    .filter-group label {
+      font-size: 0.72rem; font-weight: 600; color: var(--gray);
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .filter-group select {
+      border: 1.5px solid var(--gray-light); border-radius: 6px; padding: 9px 12px; font-size: 0.9rem;
+      color: var(--navy); background: #fff; min-width: 140px; outline: none; cursor: pointer;
+    }
+    .filter-reset {
+      margin-left: auto; background: transparent; border: 1.5px solid var(--gray-light);
+      padding: 9px 18px; border-radius: 6px; font-size: 0.88rem; font-weight: 500; cursor: pointer; color: var(--gray);
+    }
+
+    .properties-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 30px;
+    }
+    .property-card {
+      background: #fff; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow);
+      transition: transform .35s, box-shadow .35s; cursor: pointer;
+    }
+    .property-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); }
+    .property-img {
+      height: 240px; background-size: cover; background-position: center; position: relative;
+    }
+    .property-badge, .property-status {
+      position: absolute; top: 14px; left: 14px; background: var(--gold); color: var(--navy);
+      padding: 5px 12px; border-radius: 4px; font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .property-status {
+      left: auto; right: 52px; background: rgba(255,255,255,0.96); color: var(--navy); border: 1px solid rgba(10,21,37,0.06);
+    }
+    .verified-badge {
+      position: absolute; top: 14px; right: 14px; background: rgba(29,143,90,0.12); color: var(--success);
+      padding: 5px 10px; border: 1px solid rgba(29,143,90,0.2); border-radius: 999px; font-size: 0.7rem; font-weight: 700;
+    }
+    .fav-btn {
+      position: absolute; top: 52px; right: 12px; width: 36px; height: 36px; background: #fff; border: none;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer;
+      font-size: 1.05rem; box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    }
+    .fav-btn.active { color: #e11d48; }
+    .property-info { padding: 22px 24px; }
+    .property-price { font-size: 1.4rem; font-weight: 600; margin-bottom: 6px; }
+    .property-title { font-size: 1.15rem; margin-bottom: 6px; }
+    .property-location { color: var(--gray); font-size: 0.9rem; margin-bottom: 14px; }
+    .property-meta {
+      display: flex; gap: 18px; font-size: 0.88rem; color: var(--gray);
+      border-top: 1px solid var(--gray-light); padding-top: 14px; flex-wrap: wrap;
+    }
+    .empty-state { grid-column: 1 / -1; text-align: center; padding: 60px 20px; color: var(--gray); }
+    .load-more-wrap { display: flex; justify-content: center; margin-top: 32px; }
+    .load-more {
+      background: #fff; border: 1px solid var(--gray-light); color: var(--navy); padding: 12px 28px; border-radius: 999px;
+      cursor: pointer; font-weight: 600; box-shadow: var(--shadow);
+    }
+    .load-more:hover { background: var(--cream); }
+
+    .about { background: #fff; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .about-img {
+      height: 480px; background: url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=900&q=85') center/cover;
+      border-radius: 12px; position: relative;
+    }
+    .about-img::after {
+      content: ''; position: absolute; inset: 16px; border: 1.5px solid rgba(201,162,39,0.5); border-radius: 8px; pointer-events: none;
+    }
+    .about-content h2 { font-size: 2.4rem; margin-bottom: 20px; }
+    .about-content p { color: var(--gray); margin-bottom: 16px; font-size: 1.02rem; }
+    .stats { display: flex; gap: 40px; margin-top: 36px; }
+    .stat h3 { font-size: 2.3rem; color: var(--gold); }
+    .stat p { font-size: 0.88rem; color: var(--gray); }
+
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 28px; }
+    .service-card {
+      background: #fff; padding: 42px 32px; border-radius: 12px; text-align: center; box-shadow: var(--shadow);
+      transition: transform .3s, box-shadow .3s;
+    }
+    .service-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); }
+    .service-icon {
+      width: 68px; height: 68px; background: rgba(201,162,39,0.12); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; font-size: 1.7rem;
+    }
+    .service-card h3 { margin-bottom: 12px; font-size: 1.25rem; }
+    .service-card p { color: var(--gray); font-size: 0.95rem; }
+
+    .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 28px; }
+    .team-card {
+      background: #fff; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .team-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); }
+    .team-photo { height: 260px; background-size: cover; background-position: center; position: relative; }
+    .team-info { padding: 22px 20px 18px; }
+    .team-info h3 { font-size: 1.3rem; margin-bottom: 4px; }
+    .team-role {
+      color: var(--gold); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px;
+    }
+    .team-specialty { color: var(--gray); font-size: 0.92rem; margin-bottom: 12px; }
+    .team-contact { list-style: none; display: grid; gap:8px; font-size: 0.88rem; color: var(--navy); }
+    .team-contact a { color: var(--navy); }
+    .team-contact a:hover { color: var(--gold); }
+    .team-socials { display: flex; gap:10px; margin-top:16px; }
+    .team-socials a {
+      width: 32px; height: 32px; border-radius: 50%; background: var(--cream); border: 1px solid var(--gray-light);
+      display: flex; align-items: center; justify-content: center; font-size:0.8rem; font-weight:700; color: var(--navy);
+    }
+    .team-socials a:hover { background: var(--gold); color: var(--navy); }
+
+    .testimonials { background: var(--navy); color: #fff; }
+    .testimonials .section-header h2, .testimonials .section-header p { color: #fff; }
+    .testimonials .section-header p { opacity: 0.8; }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; }
+    .testimonial-card {
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 36px 32px;
+    }
+    .testimonial-text { font-size: 1.05rem; line-height: 1.7; margin-bottom: 28px; font-style: italic; opacity: 0.92; }
+    .testimonial-author { display: flex; align-items: center; gap: 14px; }
+    .author-avatar { width: 48px; height: 48px; border-radius: 50%; background-size: cover; background-position: center; }
+    .author-info strong { display: block; font-size: 0.98rem; }
+    .author-info span { font-size: 0.82rem; opacity: 0.7; }
+
+    .faq { background: var(--cream); }
+    .faq-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+    .faq-item { background: #fff; padding: 24px 22px; border-radius: 12px; box-shadow: var(--shadow); }
+    .faq-item h3 { font-size: 1.05rem; margin-bottom: 10px; }
+    .faq-item p { color: var(--gray); font-size: 0.94rem; }
+
+    .map-section { background: #fff; }
+    .map-grid { display: grid; grid-template-columns: 1.6fr 0.8fr; gap: 28px; align-items: center; }
+    .map-panel {
+      background: #fff; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); border: 1px solid var(--gray-light);
+    }
+    .map-panel iframe {
+      width: 100%; height: 420px; border: 0; display: block;
+    }
+    .map-side {
+      background: var(--cream); border: 1px solid var(--gray-light); border-radius: 16px; padding: 28px; box-shadow: var(--shadow);
+    }
+    .map-side h3 { font-size: 1.5rem; margin-bottom: 18px; }
+    .map-legend { display: grid; gap: 14px; }
+    .map-legend-item {
+      display: flex; align-items: center; gap: 12px; background: #fff; border-radius: 10px; padding: 12px 14px; border: 1px solid var(--gray-light);
+    }
+    .map-dot {
+      width: 12px; height: 12px; border-radius: 50%; background: var(--gold); display: inline-block;
+    }
+    .map-dot.green { background: var(--success); }
+    .map-dot.blue { background: var(--blue); }
+
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 60px; }
+    .contact-info h3 { font-size: 1.5rem; margin-bottom: 28px; }
+    .contact-item { margin-bottom: 26px; }
+    .contact-item strong { display: block; margin-bottom: 4px; font-size: 0.95rem; }
+    .contact-item span { color: var(--gray); font-size: 0.95rem; }
+    .contact-form { background: #fff; padding: 40px; border-radius: 12px; box-shadow: var(--shadow); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 0.82rem; font-weight: 600; margin-bottom: 6px; }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; padding: 13px 15px; border: 1.5px solid var(--gray-light); border-radius: 7px; font-size: 0.95rem; background: #fff; outline: none; transition: border .25s ease;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--gold); }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .form-status {
+      display: none; margin-bottom: 16px; padding: 12px 14px; border-radius: 8px; font-size: 0.92rem; font-weight: 500;
+    }
+    .form-status.success {
+      display: block; background: rgba(29,143,90,0.12); color: var(--success); border:1px solid rgba(29,143,90,0.2);
+    }
+    .form-status.error {
+      display: block; background: rgba(180,35,24,0.08); color: var(--error); border:1px solid rgba(180,35,24,0.2);
+    }
+
+    footer { background: #06101a; color: rgba(255,255,255,0.68); padding: 60px 0 28px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap:40px; margin-bottom:40px; }
+    .footer-brand .logo { margin-bottom: 16px; display: inline-block; }
+    .footer-brand p { font-size:0.92rem; line-height:1.7; max-width:280px; }
+    .footer-col h4 { color: #fff; margin-bottom: 18px; font-size:1.05rem; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 10px; }
+    .footer-col a { font-size:0.9rem; transition: color .25s ease; }
+    .footer-col a:hover { color: var(--gold); }
+    .footer-bottom { border-top:1px solid rgba(255,255,255,0.08); padding-top:24px; text-align:center; font-size:0.85rem; }
+
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(8,17,28,0.88); display: none; align-items: center; justify-content: center;
+      z-index: 2000; padding: 24px; backdrop-filter: blur(6px);
+    }
+    .modal-overlay.active { display: flex; }
+    .modal {
+      background: #fff; border-radius: 14px; max-width: 980px; width: 100%; max-height: 92vh; overflow-y: auto;
+      position: relative; animation: modalIn .35s ease;
+    }
+    @keyframes modalIn { from { opacity: 0; transform: translateY(20px) scale(0.98); } to { opacity: 1; transform: none; } }
+    .modal-close {
+      position: absolute; top: 16px; right: 16px; width: 40px; height: 40px; background: #fff; border: none; border-radius: 50%;
+      font-size: 1.4rem; cursor: pointer; z-index: 10; box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    }
+    .modal-gallery { height: 360px; background-size: cover; background-position: center; position: relative; }
+    .gallery-nav {
+      position: absolute; top: 50%; transform: translateY(-50%); width: 42px; height: 42px; background: #fff;
+      border: none; border-radius: 50%; font-size: 1.2rem; cursor: pointer; box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+    }
+    .gallery-prev { left: 14px; }
+    .gallery-next { right: 14px; }
+    .modal-body { padding: 32px 36px 40px; }
+    .modal-price { font-size: 1.8rem; font-weight: 600; color: var(--gold); margin-bottom: 8px; }
+    .modal-title { font-size: 1.6rem; margin-bottom: 8px; }
+    .modal-location { color: var(--gray); margin-bottom: 18px; }
+    .modal-meta {
+      display: flex; gap: 32px; margin-bottom: 22px; padding-bottom: 22px; border-bottom: 1px solid var(--gray-light); flex-wrap: wrap;
+    }
+    .modal-meta strong { display: block; font-size: 1.15rem; }
+    .modal-meta span { font-size: 0.84rem; color: var(--gray); }
+    .modal-layout { display: grid; grid-template-columns: 1.4fr 0.9fr; gap: 28px; align-items: start; }
+    .modal-desc { color: var(--gray); margin-bottom: 18px; line-height: 1.75; }
+    .modal-address { color: var(--navy); margin-bottom: 12px; font-weight: 600; }
+    .modal-detailed-list { display: grid; gap: 12px; margin: 18px 0 22px; }
+    .modal-detailed-list div { background: var(--cream); border: 1px solid var(--gray-light); border-radius: 8px; padding: 12px 14px; }
+    .modal-detailed-list strong { display: block; margin-bottom: 4px; font-size: 0.74rem; color: var(--gray); text-transform: uppercase; letter-spacing: 0.08em; }
+    .modal-detailed-list span { font-size: 0.96rem; color: var(--navy); }
+    .modal-amenities {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin: 14px 0 28px; list-style: none;
+    }
+    .modal-amenities li {
+      background: var(--cream); border: 1px solid var(--gray-light); border-radius: 8px; padding: 12px 14px; color: var(--navy); font-size: 0.9rem; font-weight: 500;
+    }
+    .tour-link { display: inline-flex; margin-bottom: 18px; color: var(--navy); font-weight: 600; }
+    .tour-link:hover { color: var(--gold); }
+    .modal-side { background: var(--cream); border: 1px solid var(--gray-light); border-radius: 12px; padding: 22px; }
+    .modal-side h4 { font-size: 1.25rem; margin-bottom:10px; }
+    .modal-side p { color: var(--gray); margin-bottom: 16px; font-size: 0.95rem; }
+    .viewing-form .form-group { margin-bottom: 12px; }
+    .viewing-form input, .viewing-form textarea { width:100%; padding:12px 14px; border:1.5px solid var(--gray-light); border-radius:8px; font: inherit; }
+    .viewing-form textarea { min-height: 90px; resize: vertical; }
+    .viewing-form button { width: 100%; margin-top: 8px; }
+    .viewing-success {
+      display: none; margin-top: 12px; background: rgba(29,143,90,0.12); color: var(--success); border: 1px solid rgba(29,143,90,0.2);
+      border-radius: 8px; padding: 10px 12px; font-size: 0.9rem; font-weight: 600;
+    }
+    .viewing-success.visible { display: block; }
+
+    .back-top {
+      position: fixed; bottom: 32px; right: 32px; width: 48px; height: 48px; background: var(--navy); color: #fff;
+      border: none; border-radius: 50%; font-size: 1.3rem; cursor: pointer; opacity: 0; visibility: hidden; transition: all .3s ease;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2); z-index: 900;
+    }
+    .back-top.visible { opacity: 1; visibility: visible; }
+
+    .whatsapp-float {
+      position: fixed; right: 24px; bottom: 24px; width: 62px; height: 62px; background: var(--green); color: #fff;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.05rem; font-weight: 700;
+      box-shadow: 0 12px 28px rgba(37, 211, 102, 0.35); z-index: 3000; transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .whatsapp-float:hover { transform: translateY(-2px); box-shadow: 0 16px 32px rgba(37,211,102,0.42); }
+
+    @media (max-width: 960px) {
+      .hamburger { display: flex; }
+      .nav-links {
+        position: fixed; top: 0; right: -100%; width: 280px; height: 100vh; background: var(--navy);
+        flex-direction: column; justify-content: flex-start; padding: 100px 32px 40px; gap: 0; transition: right .35s ease; z-index: 999; box-shadow: -10px 0 40px rgba(0,0,0,0.3);
+      }
+      .nav-links.active { right: 0; }
+      .nav-links li { width: 100%; border-bottom: 1px solid rgba(255,255,255,0.08); }
+      .nav-links a { display: block; padding: 16px 0; font-size: 1.05rem; }
+      .nav-cta { margin-top: 16px; text-align: center; display: block !important; }
+      .about-grid, .contact-grid, .footer-grid, .map-grid, .modal-layout { grid-template-columns: 1fr; }
+      .about-img { height: 360px; }
+      .form-row { grid-template-columns: 1fr; }
+      .filters-bar { flex-direction: column; align-items: stretch; }
+      .filter-reset { margin-left: 0; width: 100%; }
+      .stats { flex-wrap: wrap; gap: 24px; }
+    }
+    @media (max-width: 640px) {
+      .properties-grid { grid-template-columns: 1fr; }
+      .modal-gallery { height: 260px; }
+      .whatsapp-float { width: 56px; height: 56px; right:18px; bottom:18px; }
+    }
+  </style>
+</head>
+<body>
+  <header id="header">
+    <nav class="container">
+      <a href="#home" class="logo">Aether<span>Homes</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#properties">Properties</a></li>
+        <li><a href="#map">Map</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#team">Team</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#contact" class="nav-cta">Contact</a></li>
+      </ul>
+      <div class="hamburger" id="hamburger" aria-label="Toggle navigation menu" role="button" tabindex="0"><span></span><span></span><span></span></div>
+    </nav>
+  </header>
+
+  <section class="hero" id="home">
+    <div class="hero-slides">
+      <div class="hero-slide active" style="background-image:url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1920&q=85')"></div>
+      <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1920&q=85')"></div>
+      <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=85')"></div>
+      <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=1920&q=85')"></div>
+      <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1920&q=85')"></div>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">Premium Real Estate</div>
+        <h1>Exceptional Homes.<br>Timeless Living.</h1>
+        <p>Curated residences in Nigeria's most prestigious locations for those who refuse to settle.</p>
+        <div class="hero-btns">
+          <a href="#properties" class="btn btn-gold">Explore Properties</a>
+          <a href="#contact" class="btn btn-outline">Speak to an Advisor</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="properties">
+    <div class="container">
+      <div class="section-header">
+        <h2>Featured Properties</h2>
+        <div class="gold-line"></div>
+        <p>A carefully selected collection of exceptional residences</p>
+      </div>
+
+      <div class="filters-bar">
+        <div class="filter-group">
+          <label for="filterStatus">Status</label>
+          <select id="filterStatus" aria-label="Filter properties by status">
+            <option value="">All Status</option>
+            <option value="For Sale">For Sale</option>
+            <option value="For Rent">For Rent</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="filterType">Type</label>
+          <select id="filterType" aria-label="Filter properties by type">
+            <option value="">All Types</option>
+            <option value="House">House</option>
+            <option value="Apartment">Apartment</option>
+            <option value="Villa">Villa</option>
+            <option value="Townhouse">Townhouse</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="filterLocation">Location</label>
+          <select id="filterLocation" aria-label="Filter properties by location">
+            <option value="">All Locations</option>
+            <option value="Lagos">Lagos</option>
+            <option value="Abuja">Abuja</option>
+            <option value="Port Harcourt">Port Harcourt</option>
+            <option value="Ibadan">Ibadan</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="filterMinPrice">Min Price</label>
+          <select id="filterMinPrice" aria-label="Minimum property price">
+            <option value="">Any</option>
+            <option value="50000000">₦50m+</option>
+            <option value="75000000">₦75m+</option>
+            <option value="100000000">₦100m+</option>
+            <option value="200000000">₦200m+</option>
+            <option value="300000000">₦300m+</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="filterMaxPrice">Max Price</label>
+          <select id="filterMaxPrice" aria-label="Maximum property price">
+            <option value="">Any</option>
+            <option value="100000000">₦100m</option>
+            <option value="200000000">₦200m</option>
+            <option value="300000000">₦300m</option>
+            <option value="500000000">₦500m</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="filterBeds">Bedrooms</label>
+          <select id="filterBeds" aria-label="Filter properties by bedroom count">
+            <option value="">Any</option>
+            <option value="3">3+</option>
+            <option value="4">4+</option>
+            <option value="5">5+</option>
+            <option value="6">6+</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="filterSort">Sort</label>
+          <select id="filterSort" aria-label="Sort properties">
+            <option value="featured">Featured</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+          </select>
+        </div>
+        <button type="button" class="filter-reset" onclick="resetFilters()">Reset</button>
+      </div>
+
+      <div class="properties-grid" id="propertiesGrid"></div>
+      <div class="load-more-wrap">
+        <button type="button" class="load-more" id="loadMoreBtn">Load More Listings</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="map-section" id="map">
+    <div class="container">
+      <div class="section-header">
+        <h2>Explore Our Areas</h2>
+        <div class="gold-line"></div>
+        <p>Premium neighborhoods across Nigeria's most desirable communities</p>
+      </div>
+      <div class="map-grid">
+        <div class="map-panel">
+          <iframe src="https://www.google.com/maps?q=Lagos%20Nigeria&z=7&output=embed" title="Aether Homes Map" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <div class="map-side">
+          <h3>Coverage</h3>
+          <div class="map-legend">
+            <div class="map-legend-item"><span class="map-dot"></span><div><strong>Prime residential</strong><br><small>Luxury homes and penthouses</small></div></div>
+            <div class="map-legend-item"><span class="map-dot green"></span><div><strong>Verified listings</strong><br><small>Inspected and approved</small></div></div>
+            <div class="map-legend-item"><span class="map-dot blue"></span><div><strong>Rental hotspots</strong><br><small>High-demand neighborhoods</small></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-img"></div>
+        <div class="about-content">
+          <h2>A Legacy of Excellence</h2>
+          <p>For over two decades, Aether Homes has been the trusted partner for discerning clients seeking exceptional properties across Nigeria's premier locations.</p>
+          <p>We combine deep market knowledge with an unwavering commitment to quality, privacy, and personalized service — ensuring every client finds not just a house, but a home that reflects their lifestyle and investment ambitions.</p>
+          <div class="stats">
+            <div class="stat"><h3>850+</h3><p>Properties Sold</p></div>
+            <div class="stat"><h3>22</h3><p>Years Experience</p></div>
+            <div class="stat"><h3>98%</h3><p>Client Satisfaction</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="container">
+      <div class="section-header">
+        <h2>Our Services</h2>
+        <div class="gold-line"></div>
+        <p>Comprehensive real estate solutions tailored to your needs</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">🏠</div>
+          <h3>Property Sales</h3>
+          <p>Expert guidance through every step of buying or selling with maximum value and minimal stress.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🔑</div>
+          <h3>Luxury Rentals</h3>
+          <p>Curated selection of premium short and long-term rentals in exclusive neighborhoods.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">📐</div>
+          <h3>Property Management</h3>
+          <p>Full-service management ensuring your investment is maintained to the highest standards.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">📊</div>
+          <h3>Investment Advisory</h3>
+          <p>Strategic insights and market analysis to help you make informed investment decisions.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="team">
+    <div class="container">
+      <div class="section-header">
+        <h2>Our Team</h2>
+        <div class="gold-line"></div>
+        <p>Meet the advisors and specialists behind our client-first approach.</p>
+      </div>
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-photo" style="background-image:url('https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80')"></div>
+          <div class="team-info">
+            <h3>Daniel Adebayo</h3>
+            <div class="team-role">Managing Director</div>
+            <p class="team-specialty">Luxury homes, portfolio strategy, and high-end acquisition advisory.</p>
+            <ul class="team-contact">
+              <li><a href="tel:+2348012345678">+234 801 234 5678</a></li>
+              <li><a href="mailto:daniel@aetherhomes.com">daniel@aetherhomes.com</a></li>
+            </ul>
+            <div class="team-socials">
+              <a href="https://www.linkedin.com" target="_blank" rel="noopener" aria-label="Daniel Adebayo on LinkedIn">in</a>
+              <a href="https://www.instagram.com" target="_blank" rel="noopener" aria-label="Daniel Adebayo on Instagram">ig</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="team-card">
+          <div class="team-photo" style="background-image:url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=80')"></div>
+          <div class="team-info">
+            <h3>Amara Okafor</h3>
+            <div class="team-role">Head of Sales</div>
+            <p class="team-specialty">Buyer representation, negotiation, and bespoke residential guidance.</p>
+            <ul class="team-contact">
+              <li><a href="tel:+2348098765432">+234 809 876 5432</a></li>
+              <li><a href="mailto:amara@aetherhomes.com">amara@aetherhomes.com</a></li>
+            </ul>
+            <div class="team-socials">
+              <a href="https://www.linkedin.com" target="_blank" rel="noopener" aria-label="Amara Okafor on LinkedIn">in</a>
+              <a href="https://www.instagram.com" target="_blank" rel="noopener" aria-label="Amara Okafor on Instagram">ig</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="team-card">
+          <div class="team-photo" style="background-image:url('https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=900&q=80')"></div>
+          <div class="team-info">
+            <h3>Michael Iwuala</h3>
+            <div class="team-role">Property Consultant</div>
+            <p class="team-specialty">Mixed-use investment opportunities and rental market strategy.</p>
+            <ul class="team-contact">
+              <li><a href="tel:+2348065432187">+234 806 543 2187</a></li>
+              <li><a href="mailto:michael@aetherhomes.com">michael@aetherhomes.com</a></li>
+            </ul>
+            <div class="team-socials">
+              <a href="https://www.linkedin.com" target="_blank" rel="noopener" aria-label="Michael Iwuala on LinkedIn">in</a>
+              <a href="https://www.instagram.com" target="_blank" rel="noopener" aria-label="Michael Iwuala on Instagram">ig</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="team-card">
+          <div class="team-photo" style="background-image:url('https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=900&q=80')"></div>
+          <div class="team-info">
+            <h3>Rachel Eze</h3>
+            <div class="team-role">Client Relations Lead</div>
+            <p class="team-specialty">End-to-end client support, viewing coordination, and after-sale care.</p>
+            <ul class="team-contact">
+              <li><a href="tel:+2348034567890">+234 803 456 7890</a></li>
+              <li><a href="mailto:rachel@aetherhomes.com">rachel@aetherhomes.com</a></li>
+            </ul>
+            <div class="team-socials">
+              <a href="https://www.linkedin.com" target="_blank" rel="noopener" aria-label="Rachel Eze on LinkedIn">in</a>
+              <a href="https://www.instagram.com" target="_blank" rel="noopener" aria-label="Rachel Eze on Instagram">ig</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <div class="section-header">
+        <h2>Client Stories</h2>
+        <div class="gold-line"></div>
+        <p>What our clients say about working with us</p>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <p class="testimonial-text">"Aether Homes made the entire process effortless. Their attention to detail and understanding of what we truly wanted was exceptional."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar" style="background-image:url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80')"></div>
+            <div class="author-info"><strong>Chinedu Okonkwo</strong><span>Purchased Villa in Lagos</span></div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <p class="testimonial-text">"Professional, discreet, and incredibly knowledgeable. We found our dream home in Abuja within weeks."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar" style="background-image:url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80')"></div>
+            <div class="author-info"><strong>Amara Eze</strong><span>Purchased Penthouse in Abuja</span></div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <p class="testimonial-text">"From the first viewing to closing, the team was outstanding. Highly recommended for serious buyers."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar" style="background-image:url('https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=100&q=80')"></div>
+            <div class="author-info"><strong>Tunde Bakare</strong><span>Sold Estate in Port Harcourt</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq" id="faq">
+    <div class="container">
+      <div class="section-header">
+        <h2>Frequently Asked Questions</h2>
+        <div class="gold-line"></div>
+        <p>Everything you need to know before buying, selling, or renting</p>
+      </div>
+      <div class="faq-grid">
+        <div class="faq-item">
+          <h3>What documents are required to purchase a property?</h3>
+          <p>Usually, buyers need a valid ID, proof of address, bank statements, and, depending on the transaction, a purchase offer and proof of funds.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Do you offer property inspections?</h3>
+          <p>Yes. We arrange guided inspections, condition reviews, and neighborhood checks so clients can make informed decisions.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Do you help clients living abroad?</h3>
+          <p>Absolutely. We support remote buyers with virtual tours, secure document handling, and dedicated advisory throughout the process.</p>
+        </div>
+        <div class="faq-item">
+          <h3>How long does the buying process usually take?</h3>
+          <p>It varies by property and documentation, but many transactions are completed in 2 to 8 weeks with the right preparation.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Do you manage rental properties?</h3>
+          <p>Yes. We provide tenant placement, rent collection, property maintenance coordination, and full property management support.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <div class="section-header">
+        <h2>Get In Touch</h2>
+        <div class="gold-line"></div>
+        <p>Ready to find your next home? Let's start the conversation.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h3>Contact Information</h3>
+          <div class="contact-item"><strong>Address</strong><span>12 Admiralty Way, Lekki Phase 1<br>Lagos, Nigeria</span></div>
+          <div class="contact-item"><strong>Phone</strong><span>+234 801 234 5678</span></div>
+          <div class="contact-item"><strong>Email</strong><span>hello@aetherhomes.com</span></div>
+          <div class="contact-item"><strong>Hours</strong><span>Mon – Fri: 9am – 6pm<br>Sat: 10am – 4pm</span></div>
+        </div>
+
+        <form class="contact-form" id="contactForm" name="Aether Homes Contact" method="POST" netlify>
+          <input type="hidden" name="form-name" value="Aether Homes Contact" />
+          <input type="hidden" name="bot-field" />
+
+          <div class="form-status" id="formSuccess" role="status" aria-live="polite">Thank you! Your message has been received and our team will contact you within 24 hours.</div>
+          <div class="form-status" id="formError" role="alert" aria-live="assertive">There was a problem sending your message. Please try again or contact us directly by phone or email.</div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="firstName">First Name</label>
+              <input id="firstName" name="firstName" type="text" required placeholder="John">
+            </div>
+            <div class="form-group">
+              <label for="lastName">Last Name</label>
+              <input id="lastName" name="lastName" type="text" required placeholder="Doe">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required placeholder="john@example.com">
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input id="phone" name="phone" type="tel" placeholder="+234 800 000 0000">
+          </div>
+          <div class="form-group">
+            <label for="interest">Interest</label>
+            <select id="interest" name="interest">
+              <option>Buying a property</option>
+              <option>Selling a property</option>
+              <option>Renting</option>
+              <option>Investment advice</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Tell us about your requirements..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-gold" id="submitButton">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#home" class="logo">Aether<span>Homes</span></a>
+          <p>Premium real estate solutions for those who expect excellence. Serving Nigeria's most discerning clients since 2004.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="#properties">Properties</a></li>
+            <li><a href="#map">Map</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="#services">Property Sales</a></li>
+            <li><a href="#services">Luxury Rentals</a></li>
+            <li><a href="#services">Management</a></li>
+            <li><a href="#services">Advisory</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li>12 Admiralty Way, Lekki</li>
+            <li>+234 801 234 5678</li>
+            <li>hello@aetherhomes.com</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom"><p>© 2026 Aether Homes. All rights reserved.</p></div>
+    </div>
+  </footer>
+
+  <div class="modal-overlay" id="modal">
+    <div class="modal">
+      <button class="modal-close" id="modalClose" aria-label="Close property details">×</button>
+      <div class="modal-gallery" id="modalGallery">
+        <button class="gallery-nav gallery-prev" id="galleryPrev" aria-label="Previous property image">‹</button>
+        <button class="gallery-nav gallery-next" id="galleryNext" aria-label="Next property image">›</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-price" id="modalPrice"></div>
+        <h3 class="modal-title" id="modalTitle"></h3>
+        <div class="modal-location" id="modalLocation"></div>
+        <div class="modal-meta" id="modalMeta"></div>
+        <div class="modal-layout">
+          <div>
+            <div class="modal-address" id="modalAddress"></div>
+            <p class="modal-desc" id="modalDesc"></p>
+            <div class="modal-detailed-list" id="modalDetails"></div>
+            <a class="tour-link" id="virtualTourLink" href="#" target="_blank" rel="noopener">View virtual tour →</a>
+            <ul class="modal-amenities" id="modalAmenities"></ul>
+          </div>
+          <aside class="modal-side">
+            <h4>Schedule a Viewing</h4>
+            <p>Tell us your preferred date and our advisor will contact you to confirm.</p>
+            <form class="viewing-form" id="viewingForm">
+              <input type="hidden" id="viewingProperty" name="property" value="">
+              <div class="form-group">
+                <label for="viewingName">Full name</label>
+                <input id="viewingName" name="name" type="text" required placeholder="Your name">
+              </div>
+              <div class="form-group">
+                <label for="viewingEmail">Email</label>
+                <input id="viewingEmail" name="email" type="email" required placeholder="you@example.com">
+              </div>
+              <div class="form-group">
+                <label for="viewingDate">Preferred date</label>
+                <input id="viewingDate" name="date" type="date" required>
+              </div>
+              <div class="form-group">
+                <label for="viewingMessage">Notes</label>
+                <textarea id="viewingMessage" name="message" placeholder="Tell us what you are looking for..."></textarea>
+              </div>
+              <button type="submit" class="btn btn-gold">Request Viewing</button>
+            </form>
+            <div class="viewing-success" id="viewingSuccess">Your viewing request has been received. Our team will contact you shortly.</div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="back-top" id="backTop" aria-label="Back to top">↑</button>
+  <a class="whatsapp-float" href="https://wa.me/2348012345678?text=Hello%20Aether%20Homes%2C%20I%20am%20interested%20in%20a%20property" target="_blank" rel="noopener" aria-label="Chat with Aether Homes on WhatsApp">WA</a>
+
+  <script>
+    const PAGE_SIZE = 6;
+    const properties = [
+      {
+        id: 1,
+        title: 'Oceanview Villa',
+        type: 'Villa',
+        status: 'For Sale',
+        price: 285000000,
+        location: 'Lagos',
+        neighborhood: 'Lekki Phase 1',
+        address: '45 Oceanview Drive, Lekki Phase 1, Lagos',
+        beds: 5,
+        baths: 6,
+        area: 680,
+        images: [
+          'https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=900&q=85',
+          'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=85',
+          'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=85'
+        ],
+        badge: 'Featured',
+        desc: 'Exquisite waterfront villa with panoramic ocean views, private pool, and smart home technology designed for refined coastal living.',
+        amenities: ['Private Pool', 'Smart Home System', 'Security Gate', 'Guest House', 'Garden Lounge'],
+        parking: 4,
+        yearBuilt: 2019,
+        furnishing: 'Fully Furnished',
+        virtualTour: 'https://www.google.com/maps?q=Lekki+Phase+1+Lagos',
+        verified: true,
+        mapPlace: 'Lekki Phase 1, Lagos'
+      },
+      {
+        id: 2,
+        title: 'Modern Penthouse',
+        type: 'Apartment',
+        status: 'For Sale',
+        price: 145000000,
+        location: 'Abuja',
+        neighborhood: 'Wuse District',
+        address: '18 Suleiman Avenue, Wuse District, Abuja',
+        beds: 4,
+        baths: 4,
+        area: 320,
+        images: [
+          'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=85',
+          'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=900&q=85',
+          'https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=900&q=85'
+        ],
+        badge: 'New',
+        desc: 'Stunning penthouse with floor-to-ceiling windows and a private terrace, offering exceptional city views and walkable proximity to key business districts.',
+        amenities: ['Terrace', 'Concierge', 'Gym Access', 'EV Charging', 'City View'],
+        parking: 2,
+        yearBuilt: 2022,
+        furnishing: 'Semi-Furnished',
+        virtualTour: 'https://www.google.com/maps?q=Wuse+District+Abuja',
+        verified: true,
+        mapPlace: 'Wuse District, Abuja'
+      },
+      {
+        id: 3,
+        title: 'Colonial Estate',
+        type: 'House',
+        status: 'For Sale',
+        price: 320000000,
+        location: 'Lagos',
+        neighborhood: 'Ikoyi',
+        address: '9 Bourdillon Road, Ikoyi, Lagos',
+        beds: 6,
+        baths: 7,
+        area: 850,
+        images: [
+          'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=85',
+          'https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=900&q=85',
+          'https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=900&q=85'
+        ],
+        badge: 'Exclusive',
+        desc: 'Timeless colonial architecture on expansive grounds, complete with a guest house, tennis court, and carefully landscaped outdoor spaces.',
+        amenities: ['Tennis Court', 'Guest House', 'Staff Quarters', 'Landscape Garden', 'Home Office'],
+        parking: 5,
+        yearBuilt: 2015,
+        furnishing: 'Fully Furnished',
+        virtualTour: 'https://www.google.com/maps?q=Ikoyi+Lagos',
+        verified: true,
+        mapPlace: 'Ikoyi, Lagos'
+      },
+      {
+        id: 4,
+        title: 'Garden Townhouse',
+        type: 'Townhouse',
+        status: 'For Rent',
+        price: 95000000,
+        location: 'Port Harcourt',
+        neighborhood: 'GRA',
+        address: '7 Silverline Estate, GRA, Port Harcourt',
+        beds: 3,
+        baths: 3,
+        area: 210,
+        images: [
+          'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=900&q=85',
+          'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=900&q=85',
+          'https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=900&q=85'
+        ],
+        badge: 'For Rent',
+        desc: 'Beautifully maintained townhouse in a secure gated community with a private garden, ideal for a relaxed lifestyle in a premium neighborhood.',
+        amenities: ['Private Garden', 'Covered Parking', 'Play Area', 'Security Patrol', 'Backyard'],
+        parking: 2,
+        yearBuilt: 2018,
+        furnishing: 'Unfurnished',
+        virtualTour: 'https://www.google.com/maps?q=GRA+Port+Harcourt',
+        verified: true,
+        mapPlace: 'GRA, Port Harcourt'
+      },
+      {
+        id: 5,
+        title: 'Skyline Apartment',
+        type: 'Apartment',
+        status: 'For Sale',
+        price: 78000000,
+        location: 'Lagos',
+        neighborhood: 'Victoria Island',
+        address: '12 Oke Ado Close, Victoria Island, Lagos',
+        beds: 3,
+        baths: 3,
+        area: 185,
+        images: [
+          'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=900&q=85',
+          'https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=900&q=85',
+          'https://images.unsplash.com/photo-1460317442991-0ec209397118?auto=format&fit=crop&w=900&q=85'
+        ],
+        badge: 'Hot',
+        desc: 'Bright contemporary apartment with city views and premium building amenities, perfectly balanced for urban convenience and comfort.',
+        amenities: ['Water Front', 'Pool Deck', 'Gym', 'Lift Access', '24/7 Security'],
+        parking: 1,
+        yearBuilt: 2021,
+        furnishing: 'Semi-Furnished',
+        virtualTour: 'https://www.google.com/maps?q=Victoria+Island+Lagos',
+        verified: true,
+        mapPlace: 'Victoria Island, Lagos'
+      },
+      {
+        id: 6,
+        title: 'Riverside Villa',
+        type: 'Villa',
+        status: 'For Sale',
+        price: 410000000,
+        location: 'Abuja',
+        neighborhood: 'Jabi',
+        address: '40 Riverstone Crescent, Jabi, Abuja',
+        beds: 7,
+        baths: 8,
+        area: 920,
+        images: [
+          'https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=900&q=85',
+          'https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=900&q=85',
+          'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=85'
+        ],
+        badge: 'Luxury',
+        desc: 'Ultra-luxury riverside estate with an infinity pool, home cinema, and wine cellar, created for high-end living and entertaining.',
+        amenities: ['Infinity Pool', 'Cinema Room', 'Wine Cellar', 'Riverside Views', 'Lawn & Patio'],
+        parking: 6,
+        yearBuilt: 2023,
+        furnishing: 'Fully Furnished',
+        virtualTour: 'https://www.google.com/maps?q=Jabi+Abuja',
+        verified: true,
+        mapPlace: 'Jabi, Abuja'
+      },
+      {
+        id: 7,
+        title: 'Palm Grove Residence',
+        type: 'House',
+        status: 'For Sale',
+        price: 210000000,
+        location: 'Ibadan',
+        neighborhood: 'Old Bodija',
+        address: '8 Palm Grove, Old Bodija, Ibadan',
+        beds: 4,
+        baths: 4,
+        area: 460,
+        images: [
+          'https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=900&q=85',
+          'https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=900&q=85',
+          'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=85'
+        ],
+        badge: 'Verified',
+        desc: 'Sophisticated family home with a serene garden, premium interior finishes, and easy access to key city amenities.',
+        amenities: ['Garden', 'Open Kitchen', 'Backup Generator', 'CCTV', 'Covered Patio'],
+        parking: 3,
+        yearBuilt: 2017,
+        furnishing: 'Partially Furnished',
+        virtualTour: 'https://www.google.com/maps?q=Old+Bodija+Ibadan',
+        verified: true,
+        mapPlace: 'Old Bodija, Ibadan'
+      },
+      {
+        id: 8,
+        title: 'Harbor View Loft',
+        type: 'Apartment',
+        status: 'For Rent',
+        price: 52000000,
+        location: 'Lagos',
+        neighborhood: 'Surulere',
+        address: '24 Harbor View, Surulere, Lagos',
+        beds: 2,
+        baths: 2,
+        area: 150,
+        images: [
+          'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=900&q=85',
+          'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=85',
+          'https://images.unsplash.com/photo-1554995207-c18c203602cb?auto=format&fit=crop&w=900&q=85'
+        ],
+        badge: 'Rental',
+        desc: 'Stylish apartment close to business districts with airy interiors, balcony seating, and excellent security.',
+        amenities: ['Balcony', '24/7 Security', 'Power Backup', 'Laundry Room', 'Street Parking'],
+        parking: 1,
+        yearBuilt: 2020,
+        furnishing: 'Fully Furnished',
+        virtualTour: 'https://www.google.com/maps?q=Surulere+Lagos',
+        verified: true,
+        mapPlace: 'Surulere, Lagos'
+      }
+    ];
+
+    let favorites = JSON.parse(localStorage.getItem('aetherFavs') || '[]');
+    let filteredProperties = [...properties];
+    let visibleCount = PAGE_SIZE;
+    let currentGallery = [];
+    let currentImgIndex = 0;
+
+    const slides = document.querySelectorAll('.hero-slide');
+    let currentSlide = 0;
+    setInterval(() => {
+      slides[currentSlide].classList.remove('active');
+      currentSlide = (currentSlide + 1) % slides.length;
+      slides[currentSlide].classList.add('active');
+    }, 5000);
+
+    function formatPrice(value) {
+      return '₦' + value.toLocaleString();
+    }
+
+    function getVisibleProperties() {
+      return filteredProperties.slice(0, visibleCount);
+    }
+
+    function renderProperties(list = filteredProperties) {
+      const grid = document.getElementById('propertiesGrid');
+      const visible = list.slice(0, visibleCount);
+
+      if (!visible.length) {
+        grid.innerHTML = '<div class="empty-state"><h3>No properties match your filters</h3><p>Try adjusting or reset the filters.</p></div>';
+        return;
+      }
+
+      grid.innerHTML = visible.map((p) => `
+        <div class="property-card" onclick="openModal(${p.id})" tabindex="0" role="button" aria-label="Open details for ${p.title}">
+          <div class="property-img" style="background-image:url('${p.images[0]}')">
+            <span class="property-badge">${p.badge}</span>
+            <span class="property-status">${p.status}</span>
+            ${p.verified ? '<span class="verified-badge">Verified</span>' : ''}
+            <button class="fav-btn ${favorites.includes(p.id) ? 'active' : ''}" 
+                    onclick="event.stopPropagation(); toggleFav(${p.id}, this)" aria-label="Save ${p.title} to favorites">
+              ${favorites.includes(p.id) ? '♥' : '♡'}
+            </button>
+          </div>
+          <div class="property-info">
+            <div class="property-price">${formatPrice(p.price)}</div>
+            <h3 class="property-title">${p.title}</h3>
+            <div class="property-location">📍 ${p.location}</div>
+            <div class="property-meta">
+              <span>🛏 ${p.beds}</span>
+              <span>🛁 ${p.baths}</span>
+              <span>📐 ${p.area}m²</span>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      const loadMoreBtn = document.getElementById('loadMoreBtn');
+      if (list.length > visibleCount) {
+        loadMoreBtn.style.display = 'inline-flex';
+      } else {
+        loadMoreBtn.style.display = 'none';
+      }
+    }
+
+    function applyFilters() {
+      const status = document.getElementById('filterStatus').value;
+      const type = document.getElementById('filterType').value;
+      const loc = document.getElementById('filterLocation').value;
+      const minPrice = Number(document.getElementById('filterMinPrice').value || 0);
+      const maxPrice = Number(document.getElementById('filterMaxPrice').value || Infinity);
+      const beds = document.getElementById('filterBeds').value;
+      const sort = document.getElementById('filterSort').value;
+
+      filteredProperties = properties.filter((p) => {
+        if (status && p.status !== status) return false;
+        if (type && p.type !== type) return false;
+        if (loc && p.location !== loc) return false;
+        if (minPrice && p.price < minPrice) return false;
+        if (maxPrice && maxPrice !== Infinity && p.price > maxPrice) return false;
+        if (beds && p.beds < Number(beds)) return false;
+        return true;
+      });
+
+      if (sort === 'price-asc') filteredProperties.sort((a, b) => a.price - b.price);
+      else if (sort === 'price-desc') filteredProperties.sort((a, b) => b.price - a.price);
+
+      visibleCount = PAGE_SIZE;
+      renderProperties(filteredProperties);
+    }
+
+    function resetFilters() {
+      document.getElementById('filterStatus').value = '';
+      document.getElementById('filterType').value = '';
+      document.getElementById('filterLocation').value = '';
+      document.getElementById('filterMinPrice').value = '';
+      document.getElementById('filterMaxPrice').value = '';
+      document.getElementById('filterBeds').value = '';
+      document.getElementById('filterSort').value = 'featured';
+      filteredProperties = [...properties];
+      visibleCount = PAGE_SIZE;
+      renderProperties(filteredProperties);
+    }
+
+    function toggleFav(id, btn) {
+      if (favorites.includes(id)) {
+        favorites = favorites.filter((f) => f !== id);
+        btn.classList.remove('active');
+        btn.innerHTML = '♡';
+      } else {
+        favorites.push(id);
+        btn.classList.add('active');
+        btn.innerHTML = '♥';
+      }
+      localStorage.setItem('aetherFavs', JSON.stringify(favorites));
+    }
+
+    function openModal(id) {
+      const p = properties.find((x) => x.id === id);
+      if (!p) return;
+
+      currentGallery = p.images;
+      currentImgIndex = 0;
+      document.getElementById('modalPrice').textContent = formatPrice(p.price);
+      document.getElementById('modalTitle').textContent = p.title;
+      document.getElementById('modalLocation').textContent = `📍 ${p.neighborhood} · ${p.location}`;
+      document.getElementById('modalAddress').textContent = p.address;
+      document.getElementById('modalMeta').innerHTML = `
+        <div><strong>${p.beds}</strong><span>Bedrooms</span></div>
+        <div><strong>${p.baths}</strong><span>Bathrooms</span></div>
+        <div><strong>${p.area}m²</strong><span>Area</span></div>
+        <div><strong>${p.parking}</strong><span>Parking</span></div>
+        <div><strong>${p.yearBuilt}</strong><span>Year Built</span></div>
+        <div><strong>${p.furnishing}</strong><span>Furnishing</span></div>`;
+      document.getElementById('modalDesc').textContent = p.desc;
+      document.getElementById('modalDetails').innerHTML = `
+        <div><strong>Property Type</strong><span>${p.type}</span></div>
+        <div><strong>Neighborhood</strong><span>${p.neighborhood}</span></div>
+        <div><strong>Listing Status</strong><span>${p.status}</span></div>
+        <div><strong>Verification</strong><span>${p.verified ? 'Verified listing' : 'Standard listing'}</span></div>`;
+      document.getElementById('modalAmenities').innerHTML = p.amenities.map((item) => `<li>${item}</li>`).join('');
+      const virtualTourLink = document.getElementById('virtualTourLink');
+      virtualTourLink.href = p.virtualTour;
+      virtualTourLink.setAttribute('aria-label', `View virtual tour for ${p.title}`);
+      document.getElementById('viewingProperty').value = p.title;
+      document.getElementById('viewingSuccess').classList.remove('visible');
+      updateGallery();
+      document.getElementById('modal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function updateGallery() {
+      const gallery = document.getElementById('modalGallery');
+      gallery.style.backgroundImage = `url('${currentGallery[currentImgIndex]}')`;
+    }
+
+    function closeModal() {
+      document.getElementById('modal').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    document.getElementById('galleryPrev').onclick = (e) => {
+      e.stopPropagation();
+      currentImgIndex = (currentImgIndex - 1 + currentGallery.length) % currentGallery.length;
+      updateGallery();
+    };
+
+    document.getElementById('galleryNext').onclick = (e) => {
+      e.stopPropagation();
+      currentImgIndex = (currentImgIndex + 1) % currentGallery.length;
+      updateGallery();
+    };
+
+    document.getElementById('modalClose').onclick = closeModal;
+    document.getElementById('modal').onclick = (e) => { if (e.target.id === 'modal') closeModal(); };
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+    document.getElementById('loadMoreBtn').addEventListener('click', () => {
+      visibleCount += PAGE_SIZE;
+      renderProperties(filteredProperties);
+    });
+
+    ['filterStatus', 'filterType', 'filterLocation', 'filterMinPrice', 'filterMaxPrice', 'filterBeds', 'filterSort']
+      .forEach((id) => document.getElementById(id).addEventListener('change', applyFilters));
+
+    document.getElementById('contactForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const form = e.currentTarget;
+      const success = document.getElementById('formSuccess');
+      const error = document.getElementById('formError');
+
+      try {
+        const formData = new FormData(form);
+        await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(formData).toString()
+        });
+        form.reset();
+        success.classList.add('success');
+        error.classList.remove('error');
+      } catch (err) {
+        success.classList.remove('success');
+        error.classList.add('error');
+      }
+    });
+
+    document.getElementById('viewingForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      document.getElementById('viewingSuccess').classList.add('visible');
+      this.reset();
+    });
+
+    document.getElementById('backTop').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    window.addEventListener('scroll', () => {
+      const backTop = document.getElementById('backTop');
+      backTop.classList.toggle('visible', window.scrollY > 400);
+
+      const header = document.getElementById('header');
+      header.classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('active');
+    });
+
+    navLinks.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('active');
+      });
+    });
+
+    hamburger.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        hamburger.click();
+      }
+    });
+
+    filteredProperties = [...properties];
+    visibleCount = PAGE_SIZE;
+    renderProperties(filteredProperties);
+  </script>
 </body>
 </html>
