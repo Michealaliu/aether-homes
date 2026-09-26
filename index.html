@@ -33,6 +33,7 @@ html { scroll-behavior:smooth; }
 body { font-family:'Inter',sans-serif; color:var(--navy); background:var(--cream); line-height:1.65; -webkit-font-smoothing:antialiased; }
 h1,h2,h3,h4 { font-family:'Playfair Display',serif; font-weight:600; line-height:1.2; }
 a { text-decoration:none; color:inherit; }
+img { max-width:100%; display:block; }
 .container { max-width:1240px; margin:0 auto; padding:0 28px; }
 
 /* Header */
@@ -161,6 +162,29 @@ section { padding:100px 0; }
 }
 .service-card h3 { margin-bottom:12px; font-size:1.25rem; }
 .service-card p { color:var(--gray); font-size:0.95rem; }
+
+/* Team */
+.team-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:28px; }
+.team-card {
+  background:#fff; border-radius:12px; overflow:hidden; box-shadow:var(--shadow); transition:transform .25s ease, box-shadow .25s ease;
+}
+.team-card:hover { transform:translateY(-8px); box-shadow:var(--shadow-hover); }
+.team-photo {
+  height:260px; background-size:cover; background-position:center; position:relative;
+}
+.team-info { padding:22px 20px 18px; }
+.team-info h3 { font-size:1.3rem; margin-bottom:4px; }
+.team-role { color:var(--gold); font-size:0.8rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:10px; }
+.team-specialty { color:var(--gray); font-size:0.92rem; margin-bottom:12px; }
+.team-contact { list-style:none; display:grid; gap:8px; font-size:0.88rem; color:var(--navy); }
+.team-contact a { color:var(--navy); }
+.team-contact a:hover { color:var(--gold); }
+.team-socials { display:flex; gap:10px; margin-top:16px; }
+.team-socials a {
+  width:32px; height:32px; border-radius:50%; background:var(--cream); border:1px solid var(--gray-light);
+  display:flex; align-items:center; justify-content:center; font-size:0.8rem; font-weight:700; color:var(--navy);
+}
+.team-socials a:hover { background:var(--gold); color:var(--navy); }
 
 /* Testimonials */
 .testimonials { background:var(--navy); color:#fff; }
@@ -335,6 +359,7 @@ footer { background:#06101a; color:rgba(255,255,255,0.68); padding:60px 0 28px; 
       <li><a href="#properties">Properties</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#services">Services</a></li>
+      <li><a href="#team">Team</a></li>
       <li><a href="#testimonials">Testimonials</a></li>
       <li><a href="#contact" class="nav-cta">Contact</a></li>
     </ul>
@@ -486,6 +511,86 @@ footer { background:#06101a; color:rgba(255,255,255,0.68); padding:60px 0 28px; 
         <div class="service-icon">📊</div>
         <h3>Investment Advisory</h3>
         <p>Strategic insights and market analysis to help you make informed investment decisions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team">
+  <div class="container">
+    <div class="section-header">
+      <h2>Our Team</h2>
+      <div class="gold-line"></div>
+      <p>Meet the advisors and specialists behind our client-first approach.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-photo" style="background-image:url('https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80')"></div>
+        <div class="team-info">
+          <h3>Daniel Adebayo</h3>
+          <div class="team-role">Managing Director</div>
+          <p class="team-specialty">Luxury homes, portfolio strategy, and high-end acquisition advisory.</p>
+          <ul class="team-contact">
+            <li><a href="tel:+2348012345678">+234 801 234 5678</a></li>
+            <li><a href="mailto:daniel@aetherhomes.com">daniel@aetherhomes.com</a></li>
+          </ul>
+          <div class="team-socials">
+            <a href="https://www.linkedin.com" target="_blank" rel="noopener" aria-label="Daniel Adebayo on LinkedIn">in</a>
+            <a href="https://www.instagram.com" target="_blank" rel="noopener" aria-label="Daniel Adebayo on Instagram">ig</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-photo" style="background-image:url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=80')"></div>
+        <div class="team-info">
+          <h3>Amara Okafor</h3>
+          <div class="team-role">Head of Sales</div>
+          <p class="team-specialty">Buyer representation, negotiation, and bespoke residential guidance.</p>
+          <ul class="team-contact">
+            <li><a href="tel:+2348098765432">+234 809 876 5432</a></li>
+            <li><a href="mailto:amara@aetherhomes.com">amara@aetherhomes.com</a></li>
+          </ul>
+          <div class="team-socials">
+            <a href="https://www.linkedin.com" target="_blank" rel="noopener" aria-label="Amara Okafor on LinkedIn">in</a>
+            <a href="https://www.instagram.com" target="_blank" rel="noopener" aria-label="Amara Okafor on Instagram">ig</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-photo" style="background-image:url('https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=900&q=80')"></div>
+        <div class="team-info">
+          <h3>Michael Iwuala</h3>
+          <div class="team-role">Property Consultant</div>
+          <p class="team-specialty">Mixed-use investment opportunities and rental market strategy.</p>
+          <ul class="team-contact">
+            <li><a href="tel:+2348065432187">+234 806 543 2187</a></li>
+            <li><a href="mailto:michael@aetherhomes.com">michael@aetherhomes.com</a></li>
+          </ul>
+          <div class="team-socials">
+            <a href="https://www.linkedin.com" target="_blank" rel="noopener" aria-label="Michael Iwuala on LinkedIn">in</a>
+            <a href="https://www.instagram.com" target="_blank" rel="noopener" aria-label="Michael Iwuala on Instagram">ig</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-photo" style="background-image:url('https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=900&q=80')"></div>
+        <div class="team-info">
+          <h3>Rachel Eze</h3>
+          <div class="team-role">Client Relations Lead</div>
+          <p class="team-specialty">End-to-end client support, viewing coordination, and after-sale care.</p>
+          <ul class="team-contact">
+            <li><a href="tel:+2348034567890">+234 803 456 7890</a></li>
+            <li><a href="mailto:rachel@aetherhomes.com">rachel@aetherhomes.com</a></li>
+          </ul>
+          <div class="team-socials">
+            <a href="https://www.linkedin.com" target="_blank" rel="noopener" aria-label="Rachel Eze on LinkedIn">in</a>
+            <a href="https://www.instagram.com" target="_blank" rel="noopener" aria-label="Rachel Eze on Instagram">ig</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
