@@ -231,7 +231,7 @@ footer { background:#06101a; color:rgba(255,255,255,0.68); padding:60px 0 28px; 
 }
 .modal-overlay.active { display:flex; }
 .modal {
-  background:#fff; border-radius:14px; max-width:900px; width:100%; max-height:92vh;
+  background:#fff; border-radius:14px; max-width:980px; width:100%; max-height:92vh;
   overflow-y:auto; position:relative; animation:modalIn .35s ease;
 }
 @keyframes modalIn { from{opacity:0;transform:translateY(20px) scale(0.98);} to{opacity:1;transform:none;} }
@@ -248,11 +248,17 @@ footer { background:#06101a; color:rgba(255,255,255,0.68); padding:60px 0 28px; 
 .modal-body { padding:32px 36px 40px; }
 .modal-price { font-size:1.8rem; font-weight:600; color:var(--gold); margin-bottom:8px; }
 .modal-title { font-size:1.6rem; margin-bottom:8px; }
-.modal-location { color:var(--gray); margin-bottom:22px; }
+.modal-location { color:var(--gray); margin-bottom:18px; }
 .modal-meta { display:flex; gap:32px; margin-bottom:22px; padding-bottom:22px; border-bottom:1px solid var(--gray-light); flex-wrap:wrap; }
 .modal-meta strong { display:block; font-size:1.15rem; }
 .modal-meta span { font-size:0.84rem; color:var(--gray); }
-.modal-desc { color:var(--gray); margin-bottom:28px; line-height:1.75; }
+.modal-layout { display:grid; grid-template-columns:1.4fr 0.9fr; gap:28px; align-items:start; }
+.modal-desc { color:var(--gray); margin-bottom:18px; line-height:1.75; }
+.modal-address { color:var(--navy); margin-bottom:12px; font-weight:600; }
+.modal-detailed-list { display:grid; gap:12px; margin:18px 0 22px; }
+.modal-detailed-list div { background:var(--cream); border:1px solid var(--gray-light); border-radius:8px; padding:12px 14px; }
+.modal-detailed-list strong { display:block; margin-bottom:4px; font-size:0.74rem; color:var(--gray); text-transform:uppercase; letter-spacing:0.08em; }
+.modal-detailed-list span { font-size:0.96rem; color:var(--navy); }
 .modal-amenities {
   display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
   gap:12px; margin:14px 0 28px; list-style:none;
@@ -261,6 +267,21 @@ footer { background:#06101a; color:rgba(255,255,255,0.68); padding:60px 0 28px; 
   background:var(--cream); border:1px solid var(--gray-light); border-radius:8px;
   padding:12px 14px; color:var(--navy); font-size:0.9rem; font-weight:500;
 }
+.tour-link { display:inline-flex; margin-bottom:18px; color:var(--navy); font-weight:600; }
+.tour-link:hover { color:var(--gold); }
+.modal-side {
+  background:var(--cream); border:1px solid var(--gray-light); border-radius:12px; padding:22px;
+}
+.modal-side h4 { font-size:1.25rem; margin-bottom:10px; }
+.modal-side p { color:var(--gray); margin-bottom:16px; font-size:0.95rem; }
+.viewing-form .form-group { margin-bottom:12px; }
+.viewing-form input, .viewing-form textarea { width:100%; padding:12px 14px; border:1.5px solid var(--gray-light); border-radius:8px; font:inherit; }
+.viewing-form textarea { min-height:90px; resize:vertical; }
+.viewing-form button { width:100%; margin-top:8px; }
+.viewing-success {
+  display:none; margin-top:12px; background:rgba(29,143,90,0.12); color:var(--success); border:1px solid rgba(29,143,90,0.2); border-radius:8px; padding:10px 12px; font-size:0.9rem; font-weight:600;
+}
+.viewing-success.visible { display:block; }
 
 /* Back to top */
 .back-top {
@@ -290,7 +311,7 @@ footer { background:#06101a; color:rgba(255,255,255,0.68); padding:60px 0 28px; 
   .nav-links li { width:100%; border-bottom:1px solid rgba(255,255,255,0.08); }
   .nav-links a { display:block; padding:16px 0; font-size:1.05rem; }
   .nav-cta { margin-top:16px; text-align:center; display:block!important; }
-  .about-grid, .contact-grid, .footer-grid { grid-template-columns:1fr; }
+  .about-grid, .contact-grid, .footer-grid, .modal-layout { grid-template-columns:1fr; }
   .about-img { height:360px; }
   .form-row { grid-template-columns:1fr; }
   .filters-bar { flex-direction:column; align-items:stretch; }
@@ -649,9 +670,40 @@ footer { background:#06101a; color:rgba(255,255,255,0.68); padding:60px 0 28px; 
       <h3 class="modal-title" id="modalTitle"></h3>
       <div class="modal-location" id="modalLocation"></div>
       <div class="modal-meta" id="modalMeta"></div>
-      <p class="modal-desc" id="modalDesc"></p>
-      <ul class="modal-amenities" id="modalAmenities"></ul>
-      <a href="#contact" class="btn btn-gold" onclick="closeModal()">Schedule a Viewing</a>
+      <div class="modal-layout">
+        <div>
+          <div class="modal-address" id="modalAddress"></div>
+          <p class="modal-desc" id="modalDesc"></p>
+          <div class="modal-detailed-list" id="modalDetails"></div>
+          <a class="tour-link" id="virtualTourLink" href="#" target="_blank" rel="noopener">View virtual tour →</a>
+          <ul class="modal-amenities" id="modalAmenities"></ul>
+        </div>
+        <aside class="modal-side">
+          <h4>Schedule a Viewing</h4>
+          <p>Tell us your preferred date and our advisor will contact you to confirm.</p>
+          <form class="viewing-form" id="viewingForm">
+            <input type="hidden" id="viewingProperty" name="property" value="">
+            <div class="form-group">
+              <label for="viewingName">Full name</label>
+              <input id="viewingName" name="name" type="text" required placeholder="Your name">
+            </div>
+            <div class="form-group">
+              <label for="viewingEmail">Email</label>
+              <input id="viewingEmail" name="email" type="email" required placeholder="you@example.com">
+            </div>
+            <div class="form-group">
+              <label for="viewingDate">Preferred date</label>
+              <input id="viewingDate" name="date" type="date" required>
+            </div>
+            <div class="form-group">
+              <label for="viewingMessage">Notes</label>
+              <textarea id="viewingMessage" name="message" placeholder="Tell us what you are looking for..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-gold">Request Viewing</button>
+          </form>
+          <div class="viewing-success" id="viewingSuccess">Your viewing request has been received. Our team will contact you shortly.</div>
+        </aside>
+      </div>
     </div>
   </div>
 </div>
@@ -662,36 +714,36 @@ footer { background:#06101a; color:rgba(255,255,255,0.68); padding:60px 0 28px; 
 <script>
 // ========== DATA ==========
 const properties = [
-  {id:1,title:"Oceanview Villa",type:"Villa",price:285000000,location:"Lagos",beds:5,baths:6,area:680,
+  {id:1,title:"Oceanview Villa",type:"Villa",price:285000000,location:"Lagos",neighborhood:"Lekki Phase 1",address:"45 Oceanview Drive, Lekki Phase 1, Lagos",beds:5,baths:6,area:680,
    images:["https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=85"],
-   badge:"Featured",desc:"Exquisite waterfront villa with panoramic ocean views, private pool and smart home technology.",
+   badge:"Featured",desc:"Exquisite waterfront villa with panoramic ocean views, private pool, and smart home technology designed for refined coastal living.",
    amenities:["Private Pool","Smart Home System","Security Gate","Guest House","Garden Lounge"],
-   parking:4, yearBuilt:2019, furnishing:"Fully Furnished"},
-  {id:2,title:"Modern Penthouse",type:"Apartment",price:145000000,location:"Abuja",beds:4,baths:4,area:320,
+   parking:4, yearBuilt:2019, furnishing:"Fully Furnished", virtualTour:"https://www.google.com/maps?q=Lekki+Phase+1+Lagos"},
+  {id:2,title:"Modern Penthouse",type:"Apartment",price:145000000,location:"Abuja",neighborhood:"Wuse District",address:"18 Suleiman Avenue, Wuse District, Abuja",beds:4,baths:4,area:320,
    images:["https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=900&q=85"],
-   badge:"New",desc:"Stunning penthouse with floor-to-ceiling windows and private terrace in the heart of Abuja.",
+   badge:"New",desc:"Stunning penthouse with floor-to-ceiling windows and a private terrace, offering exceptional city views and walkable proximity to key business districts.",
    amenities:["Terrace","Concierge","Gym Access","EV Charging","City View"],
-   parking:2, yearBuilt:2022, furnishing:"Semi-Furnished"},
-  {id:3,title:"Colonial Estate",type:"House",price:320000000,location:"Lagos",beds:6,baths:7,area:850,
+   parking:2, yearBuilt:2022, furnishing:"Semi-Furnished", virtualTour:"https://www.google.com/maps?q=Wuse+District+Abuja"},
+  {id:3,title:"Colonial Estate",type:"House",price:320000000,location:"Lagos",neighborhood:"Ikoyi",address:"9 Bourdillon Road, Ikoyi, Lagos",beds:6,baths:7,area:850,
    images:["https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=900&q=85"],
-   badge:"Exclusive",desc:"Timeless colonial architecture on expansive grounds with guest house and tennis court.",
+   badge:"Exclusive",desc:"Timeless colonial architecture on expansive grounds, complete with a guest house, tennis court, and carefully landscaped outdoor spaces.",
    amenities:["Tennis Court","Guest House","Staff Quarters","Landscape Garden","Home Office"],
-   parking:5, yearBuilt:2015, furnishing:"Fully Furnished"},
-  {id:4,title:"Garden Townhouse",type:"Townhouse",price:95000000,location:"Port Harcourt",beds:3,baths:3,area:210,
+   parking:5, yearBuilt:2015, furnishing:"Fully Furnished", virtualTour:"https://www.google.com/maps?q=Ikoyi+Lagos"},
+  {id:4,title:"Garden Townhouse",type:"Townhouse",price:95000000,location:"Port Harcourt",neighborhood:"GRA",address:"7 Silverline Estate, GRA, Port Harcourt",beds:3,baths:3,area:210,
    images:["https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=900&q=85"],
-   badge:"For Sale",desc:"Beautifully maintained townhouse in a secure gated community with private garden.",
+   badge:"For Sale",desc:"Beautifully maintained townhouse in a secure gated community with a private garden, ideal for a relaxed lifestyle in a premium neighborhood.",
    amenities:["Private Garden","Covered Parking","Play Area","Security Patrol","Backyard"],
-   parking:2, yearBuilt:2018, furnishing:"Unfurnished"},
-  {id:5,title:"Skyline Apartment",type:"Apartment",price:78000000,location:"Lagos",beds:3,baths:3,area:185,
+   parking:2, yearBuilt:2018, furnishing:"Unfurnished", virtualTour:"https://www.google.com/maps?q=GRA+Port+Harcourt"},
+  {id:5,title:"Skyline Apartment",type:"Apartment",price:78000000,location:"Lagos",neighborhood:"Victoria Island",address:"12 Oke Ado Close, Victoria Island, Lagos",beds:3,baths:3,area:185,
    images:["https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=900&q=85"],
-   badge:"Hot",desc:"Bright contemporary apartment with city views and premium building amenities.",
+   badge:"Hot",desc:"Bright contemporary apartment with city views and premium building amenities, perfectly balanced for urban convenience and comfort.",
    amenities:["Water Front","Pool Deck","Gym","Lift Access","24/7 Security"],
-   parking:1, yearBuilt:2021, furnishing:"Semi-Furnished"},
-  {id:6,title:"Riverside Villa",type:"Villa",price:410000000,location:"Abuja",beds:7,baths:8,area:920,
+   parking:1, yearBuilt:2021, furnishing:"Semi-Furnished", virtualTour:"https://www.google.com/maps?q=Victoria+Island+Lagos"},
+  {id:6,title:"Riverside Villa",type:"Villa",price:410000000,location:"Abuja",neighborhood:"Jabi",address:"40 Riverstone Crescent, Jabi, Abuja",beds:7,baths:8,area:920,
    images:["https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=85"],
-   badge:"Luxury",desc:"Ultra-luxury riverside estate with infinity pool, home cinema and wine cellar.",
+   badge:"Luxury",desc:"Ultra-luxury riverside estate with an infinity pool, home cinema, and wine cellar, created for high-end living and entertaining.",
    amenities:["Infinity Pool","Cinema Room","Wine Cellar","Riverside Views","Lawn & Patio"],
-   parking:6, yearBuilt:2023, furnishing:"Fully Furnished"}
+   parking:6, yearBuilt:2023, furnishing:"Fully Furnished", virtualTour:"https://www.google.com/maps?q=Jabi+Abuja"}
 ];
 
 let favorites = JSON.parse(localStorage.getItem('aetherFavs') || '[]');
@@ -794,7 +846,8 @@ function openModal(id) {
   currentImgIndex = 0;
   document.getElementById('modalPrice').textContent = formatPrice(p.price);
   document.getElementById('modalTitle').textContent = p.title;
-  document.getElementById('modalLocation').textContent = `📍 ${p.location} · ${p.type}`;
+  document.getElementById('modalLocation').textContent = `📍 ${p.neighborhood} · ${p.location}`;
+  document.getElementById('modalAddress').textContent = p.address;
   document.getElementById('modalMeta').innerHTML = `
     <div><strong>${p.beds}</strong><span>Bedrooms</span></div>
     <div><strong>${p.baths}</strong><span>Bathrooms</span></div>
@@ -803,7 +856,16 @@ function openModal(id) {
     <div><strong>${p.yearBuilt}</strong><span>Year Built</span></div>
     <div><strong>${p.furnishing}</strong><span>Furnishing</span></div>`;
   document.getElementById('modalDesc').textContent = p.desc;
+  document.getElementById('modalDetails').innerHTML = `
+    <div><strong>Property Type</strong><span>${p.type}</span></div>
+    <div><strong>Neighborhood</strong><span>${p.neighborhood}</span></div>
+    <div><strong>Listing Status</strong><span>Available for viewing</span></div>`;
   document.getElementById('modalAmenities').innerHTML = p.amenities.map(item => `<li>${item}</li>`).join('');
+  const virtualTourLink = document.getElementById('virtualTourLink');
+  virtualTourLink.href = p.virtualTour;
+  virtualTourLink.setAttribute('aria-label', `View virtual tour for ${p.title}`);
+  document.getElementById('viewingProperty').value = p.title;
+  document.getElementById('viewingSuccess').classList.remove('visible');
   updateGallery();
   document.getElementById('modal').classList.add('active');
   document.body.style.overflow = 'hidden';
@@ -876,6 +938,17 @@ contactForm.addEventListener('submit', async (e) => {
     submitButton.disabled = false;
     submitButton.textContent = 'Send Message';
   }
+});
+
+const viewingForm = document.getElementById('viewingForm');
+const viewingSuccess = document.getElementById('viewingSuccess');
+
+viewingForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const propertyName = document.getElementById('viewingProperty').value;
+  viewingSuccess.textContent = `Thanks! Your viewing request for ${propertyName} has been received. We will contact you shortly.`;
+  viewingSuccess.classList.add('visible');
+  viewingForm.reset();
 });
 
 // ========== HAMBURGER ==========
