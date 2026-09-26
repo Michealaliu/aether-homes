@@ -17,6 +17,8 @@
   --gray-light: #e6eaef;
   --shadow: 0 12px 40px rgba(10,21,37,0.08);
   --shadow-hover: 0 24px 50px rgba(10,21,37,0.14);
+  --success: #1d8f5a;
+  --error: #b42318;
 }
 * { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior:smooth; }
@@ -167,6 +169,15 @@ section { padding:100px 0; }
 .author-info strong { display:block; font-size:0.98rem; }
 .author-info span { font-size:0.82rem; opacity:0.7; }
 
+/* FAQ */
+.faq { background:var(--cream); }
+.faq-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px; }
+.faq-item {
+  background:#fff; padding:24px 22px; border-radius:12px; box-shadow:var(--shadow);
+}
+.faq-item h3 { font-size:1.05rem; margin-bottom:10px; }
+.faq-item p { color:var(--gray); font-size:0.94rem; }
+
 /* Contact */
 .contact-grid { display:grid; grid-template-columns:1fr 1.3fr; gap:60px; }
 .contact-info h3 { font-size:1.5rem; margin-bottom:28px; }
@@ -183,6 +194,15 @@ section { padding:100px 0; }
 }
 .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color:var(--gold); }
 .form-group textarea { resize:vertical; min-height:120px; }
+.form-status {
+  display:none; margin-bottom:16px; padding:12px 14px; border-radius:8px; font-size:0.92rem; font-weight:500;
+}
+.form-status.success {
+  display:block; background:rgba(29,143,90,0.12); color:var(--success); border:1px solid rgba(29,143,90,0.2);
+}
+.form-status.error {
+  display:block; background:rgba(180,35,24,0.08); color:var(--error); border:1px solid rgba(180,35,24,0.2);
+}
 
 /* Footer */
 footer { background:#06101a; color:rgba(255,255,255,0.68); padding:60px 0 28px; }
@@ -221,10 +241,18 @@ footer { background:#06101a; color:rgba(255,255,255,0.68); padding:60px 0 28px; 
 .modal-price { font-size:1.8rem; font-weight:600; color:var(--gold); margin-bottom:8px; }
 .modal-title { font-size:1.6rem; margin-bottom:8px; }
 .modal-location { color:var(--gray); margin-bottom:22px; }
-.modal-meta { display:flex; gap:32px; margin-bottom:22px; padding-bottom:22px; border-bottom:1px solid var(--gray-light); }
+.modal-meta { display:flex; gap:32px; margin-bottom:22px; padding-bottom:22px; border-bottom:1px solid var(--gray-light); flex-wrap:wrap; }
 .modal-meta strong { display:block; font-size:1.15rem; }
 .modal-meta span { font-size:0.84rem; color:var(--gray); }
 .modal-desc { color:var(--gray); margin-bottom:28px; line-height:1.75; }
+.modal-amenities {
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
+  gap:12px; margin:14px 0 28px; list-style:none;
+}
+.modal-amenities li {
+  background:var(--cream); border:1px solid var(--gray-light); border-radius:8px;
+  padding:12px 14px; color:var(--navy); font-size:0.9rem; font-weight:500;
+}
 
 /* Back to top */
 .back-top {
@@ -233,6 +261,15 @@ footer { background:#06101a; color:rgba(255,255,255,0.68); padding:60px 0 28px; 
   transition:all .3s; box-shadow:0 8px 24px rgba(0,0,0,0.2); z-index:900;
 }
 .back-top.visible { opacity:1; visibility:visible; }
+
+/* WhatsApp */
+.whatsapp-float {
+  position:fixed; right:24px; bottom:24px; width:62px; height:62px; background:#25d366; color:#fff;
+  border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-size:1.8rem; box-shadow:0 12px 28px rgba(37, 211, 102, 0.35);
+  z-index:3000; transition:transform .25s ease, box-shadow .25s ease;
+}
+.whatsapp-float:hover { transform:translateY(-2px); box-shadow:0 16px 32px rgba(37, 211, 102, 0.42); }
 
 /* Mobile */
 @media (max-width:960px) {
@@ -256,6 +293,7 @@ footer { background:#06101a; color:rgba(255,255,255,0.68); padding:60px 0 28px; 
 @media (max-width:640px) {
   .properties-grid { grid-template-columns:1fr; }
   .modal-gallery { height:260px; }
+  .whatsapp-float { width:56px; height:56px; right:18px; bottom:18px; }
 }
 </style>
 </head>
@@ -272,7 +310,7 @@ footer { background:#06101a; color:rgba(255,255,255,0.68); padding:60px 0 28px; 
       <li><a href="#testimonials">Testimonials</a></li>
       <li><a href="#contact" class="nav-cta">Contact</a></li>
     </ul>
-    <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+    <div class="hamburger" id="hamburger" aria-label="Toggle navigation menu" role="button" tabindex="0"><span></span><span></span><span></span></div>
   </nav>
 </header>
 
@@ -309,8 +347,8 @@ footer { background:#06101a; color:rgba(255,255,255,0.68); padding:60px 0 28px; 
     </div>
     <div class="filters-bar">
       <div class="filter-group">
-        <label>Type</label>
-        <select id="filterType">
+        <label for="filterType">Type</label>
+        <select id="filterType" aria-label="Filter properties by type">
           <option value="">All Types</option>
           <option value="House">House</option>
           <option value="Apartment">Apartment</option>
@@ -319,8 +357,8 @@ footer { background:#06101a; color:rgba(255,255,255,0.68); padding:60px 0 28px; 
         </select>
       </div>
       <div class="filter-group">
-        <label>Location</label>
-        <select id="filterLocation">
+        <label for="filterLocation">Location</label>
+        <select id="filterLocation" aria-label="Filter properties by location">
           <option value="">All Locations</option>
           <option value="Lagos">Lagos</option>
           <option value="Abuja">Abuja</option>
@@ -329,8 +367,29 @@ footer { background:#06101a; color:rgba(255,255,255,0.68); padding:60px 0 28px; 
         </select>
       </div>
       <div class="filter-group">
-        <label>Bedrooms</label>
-        <select id="filterBeds">
+        <label for="filterMinPrice">Min Price</label>
+        <select id="filterMinPrice" aria-label="Minimum property price">
+          <option value="">Any</option>
+          <option value="50000000">₦50m+</option>
+          <option value="75000000">₦75m+</option>
+          <option value="100000000">₦100m+</option>
+          <option value="200000000">₦200m+</option>
+          <option value="300000000">₦300m+</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="filterMaxPrice">Max Price</label>
+        <select id="filterMaxPrice" aria-label="Maximum property price">
+          <option value="">Any</option>
+          <option value="100000000">₦100m</option>
+          <option value="200000000">₦200m</option>
+          <option value="300000000">₦300m</option>
+          <option value="500000000">₦500m</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="filterBeds">Bedrooms</label>
+        <select id="filterBeds" aria-label="Filter properties by bedroom count">
           <option value="">Any</option>
           <option value="3">3+</option>
           <option value="4">4+</option>
@@ -339,14 +398,14 @@ footer { background:#06101a; color:rgba(255,255,255,0.68); padding:60px 0 28px; 
         </select>
       </div>
       <div class="filter-group">
-        <label>Sort</label>
-        <select id="filterSort">
+        <label for="filterSort">Sort</label>
+        <select id="filterSort" aria-label="Sort properties">
           <option value="featured">Featured</option>
           <option value="price-asc">Price: Low to High</option>
           <option value="price-desc">Price: High to Low</option>
         </select>
       </div>
-      <button class="filter-reset" onclick="resetFilters()">Reset</button>
+      <button type="button" class="filter-reset" onclick="resetFilters()">Reset</button>
     </div>
     <div class="properties-grid" id="propertiesGrid"></div>
   </div>
@@ -438,6 +497,39 @@ footer { background:#06101a; color:rgba(255,255,255,0.68); padding:60px 0 28px; 
   </div>
 </section>
 
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="section-header">
+      <h2>Frequently Asked Questions</h2>
+      <div class="gold-line"></div>
+      <p>Everything you need to know before buying, selling, or renting</p>
+    </div>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <h3>What documents are required to purchase a property?</h3>
+        <p>Usually, buyers need a valid ID, proof of address, bank statements, and, depending on the transaction, a purchase offer and proof of funds.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Do you offer property inspections?</h3>
+        <p>Yes. We arrange guided inspections, condition reviews, and neighborhood checks so clients can make informed decisions.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Do you help clients living abroad?</h3>
+        <p>Absolutely. We support remote buyers with virtual tours, secure document handling, and dedicated advisory throughout the process.</p>
+      </div>
+      <div class="faq-item">
+        <h3>How long does the buying process usually take?</h3>
+        <p>It varies by property and documentation, but many transactions are completed in 2 to 8 weeks with the right preparation.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Do you manage rental properties?</h3>
+        <p>Yes. We provide tenant placement, rent collection, property maintenance coordination, and full property management support.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CONTACT -->
 <section id="contact">
   <div class="container">
@@ -454,16 +546,34 @@ footer { background:#06101a; color:rgba(255,255,255,0.68); padding:60px 0 28px; 
         <div class="contact-item"><strong>Email</strong><span>hello@aetherhomes.com</span></div>
         <div class="contact-item"><strong>Hours</strong><span>Mon – Fri: 9am – 6pm<br>Sat: 10am – 4pm</span></div>
       </div>
-      <form class="contact-form" id="contactForm">
+      <form class="contact-form" id="contactForm" name="Aether Homes Contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="Aether Homes Contact" />
+        <input type="hidden" name="bot-field" />
+
+        <div class="form-status" id="formSuccess" role="status" aria-live="polite">Thank you! Your message has been received and our team will contact you within 24 hours.</div>
+        <div class="form-status" id="formError" role="alert" aria-live="assertive">There was a problem sending your message. Please try again or contact us directly by phone or email.</div>
+
         <div class="form-row">
-          <div class="form-group"><label>First Name</label><input type="text" required placeholder="John"></div>
-          <div class="form-group"><label>Last Name</label><input type="text" required placeholder="Doe"></div>
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input id="firstName" name="firstName" type="text" required placeholder="John">
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input id="lastName" name="lastName" type="text" required placeholder="Doe">
+          </div>
         </div>
-        <div class="form-group"><label>Email</label><input type="email" required placeholder="john@example.com"></div>
-        <div class="form-group"><label>Phone</label><input type="tel" placeholder="+234 800 000 0000"></div>
         <div class="form-group">
-          <label>Interest</label>
-          <select>
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" required placeholder="john@example.com">
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone</label>
+          <input id="phone" name="phone" type="tel" placeholder="+234 800 000 0000">
+        </div>
+        <div class="form-group">
+          <label for="interest">Interest</label>
+          <select id="interest" name="interest">
             <option>Buying a property</option>
             <option>Selling a property</option>
             <option>Renting</option>
@@ -471,7 +581,10 @@ footer { background:#06101a; color:rgba(255,255,255,0.68); padding:60px 0 28px; 
             <option>Other</option>
           </select>
         </div>
-        <div class="form-group"><label>Message</label><textarea placeholder="Tell us about your requirements..."></textarea></div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Tell us about your requirements..."></textarea>
+        </div>
         <button type="submit" class="btn btn-gold">Send Message</button>
       </form>
     </div>
@@ -519,10 +632,10 @@ footer { background:#06101a; color:rgba(255,255,255,0.68); padding:60px 0 28px; 
 <!-- Modal -->
 <div class="modal-overlay" id="modal">
   <div class="modal">
-    <button class="modal-close" id="modalClose">×</button>
+    <button class="modal-close" id="modalClose" aria-label="Close property details">×</button>
     <div class="modal-gallery" id="modalGallery">
-      <button class="gallery-nav gallery-prev" id="galleryPrev">‹</button>
-      <button class="gallery-nav gallery-next" id="galleryNext">›</button>
+      <button class="gallery-nav gallery-prev" id="galleryPrev" aria-label="Previous property image">‹</button>
+      <button class="gallery-nav gallery-next" id="galleryNext" aria-label="Next property image">›</button>
     </div>
     <div class="modal-body">
       <div class="modal-price" id="modalPrice"></div>
@@ -530,34 +643,48 @@ footer { background:#06101a; color:rgba(255,255,255,0.68); padding:60px 0 28px; 
       <div class="modal-location" id="modalLocation"></div>
       <div class="modal-meta" id="modalMeta"></div>
       <p class="modal-desc" id="modalDesc"></p>
+      <ul class="modal-amenities" id="modalAmenities"></ul>
       <a href="#contact" class="btn btn-gold" onclick="closeModal()">Schedule a Viewing</a>
     </div>
   </div>
 </div>
 
-<button class="back-top" id="backTop">↑</button>
+<button class="back-top" id="backTop" aria-label="Back to top">↑</button>
+<a class="whatsapp-float" href="https://wa.me/2348012345678?text=Hello%20Aether%20Homes%2C%20I%20am%20interested%20in%20a%20property" target="_blank" rel="noopener" aria-label="Chat with Aether Homes on WhatsApp">WhatsApp</a>
 
 <script>
 // ========== DATA ==========
 const properties = [
   {id:1,title:"Oceanview Villa",type:"Villa",price:285000000,location:"Lagos",beds:5,baths:6,area:680,
    images:["https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=85"],
-   badge:"Featured",desc:"Exquisite waterfront villa with panoramic ocean views, private pool and smart home technology."},
+   badge:"Featured",desc:"Exquisite waterfront villa with panoramic ocean views, private pool and smart home technology.",
+   amenities:["Private Pool","Smart Home System","Security Gate","Guest House","Garden Lounge"],
+   parking:4, yearBuilt:2019, furnishing:"Fully Furnished"},
   {id:2,title:"Modern Penthouse",type:"Apartment",price:145000000,location:"Abuja",beds:4,baths:4,area:320,
    images:["https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=900&q=85"],
-   badge:"New",desc:"Stunning penthouse with floor-to-ceiling windows and private terrace in the heart of Abuja."},
+   badge:"New",desc:"Stunning penthouse with floor-to-ceiling windows and private terrace in the heart of Abuja.",
+   amenities:["Terrace","Concierge","Gym Access","EV Charging","City View"],
+   parking:2, yearBuilt:2022, furnishing:"Semi-Furnished"},
   {id:3,title:"Colonial Estate",type:"House",price:320000000,location:"Lagos",beds:6,baths:7,area:850,
    images:["https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=900&q=85"],
-   badge:"Exclusive",desc:"Timeless colonial architecture on expansive grounds with guest house and tennis court."},
+   badge:"Exclusive",desc:"Timeless colonial architecture on expansive grounds with guest house and tennis court.",
+   amenities:["Tennis Court","Guest House","Staff Quarters","Landscape Garden","Home Office"],
+   parking:5, yearBuilt:2015, furnishing:"Fully Furnished"},
   {id:4,title:"Garden Townhouse",type:"Townhouse",price:95000000,location:"Port Harcourt",beds:3,baths:3,area:210,
    images:["https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=900&q=85"],
-   badge:"For Sale",desc:"Beautifully maintained townhouse in a secure gated community with private garden."},
+   badge:"For Sale",desc:"Beautifully maintained townhouse in a secure gated community with private garden.",
+   amenities:["Private Garden","Covered Parking","Play Area","Security Patrol","Backyard"],
+   parking:2, yearBuilt:2018, furnishing:"Unfurnished"},
   {id:5,title:"Skyline Apartment",type:"Apartment",price:78000000,location:"Lagos",beds:3,baths:3,area:185,
    images:["https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=900&q=85"],
-   badge:"Hot",desc:"Bright contemporary apartment with city views and premium building amenities."},
+   badge:"Hot",desc:"Bright contemporary apartment with city views and premium building amenities.",
+   amenities:["Water Front","Pool Deck","Gym","Lift Access","24/7 Security"],
+   parking:1, yearBuilt:2021, furnishing:"Semi-Furnished"},
   {id:6,title:"Riverside Villa",type:"Villa",price:410000000,location:"Abuja",beds:7,baths:8,area:920,
    images:["https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=900&q=85"],
-   badge:"Luxury",desc:"Ultra-luxury riverside estate with infinity pool, home cinema and wine cellar."}
+   badge:"Luxury",desc:"Ultra-luxury riverside estate with infinity pool, home cinema and wine cellar.",
+   amenities:["Infinity Pool","Cinema Room","Wine Cellar","Riverside Views","Lawn & Patio"],
+   parking:6, yearBuilt:2023, furnishing:"Fully Furnished"}
 ];
 
 let favorites = JSON.parse(localStorage.getItem('aetherFavs') || '[]');
@@ -587,7 +714,7 @@ function renderProperties(list) {
       <div class="property-img" style="background-image:url('${p.images[0]}')">
         <span class="property-badge">${p.badge}</span>
         <button class="fav-btn ${favorites.includes(p.id) ? 'active' : ''}" 
-                onclick="event.stopPropagation(); toggleFav(${p.id}, this)">
+                onclick="event.stopPropagation(); toggleFav(${p.id}, this)" aria-label="Save ${p.title} to favorites">
           ${favorites.includes(p.id) ? '♥' : '♡'}
         </button>
       </div>
@@ -610,10 +737,15 @@ function applyFilters() {
   let list = [...properties];
   const type = document.getElementById('filterType').value;
   const loc = document.getElementById('filterLocation').value;
+  const minPrice = Number(document.getElementById('filterMinPrice').value || 0);
+  const maxPrice = Number(document.getElementById('filterMaxPrice').value || Infinity);
   const beds = document.getElementById('filterBeds').value;
   const sort = document.getElementById('filterSort').value;
+
   if (type) list = list.filter(p => p.type === type);
   if (loc) list = list.filter(p => p.location === loc);
+  if (minPrice) list = list.filter(p => p.price >= minPrice);
+  if (maxPrice && maxPrice !== Infinity) list = list.filter(p => p.price <= maxPrice);
   if (beds) list = list.filter(p => p.beds >= +beds);
   if (sort === 'price-asc') list.sort((a,b) => a.price - b.price);
   else if (sort === 'price-desc') list.sort((a,b) => b.price - a.price);
@@ -623,12 +755,14 @@ function applyFilters() {
 function resetFilters() {
   document.getElementById('filterType').value = '';
   document.getElementById('filterLocation').value = '';
+  document.getElementById('filterMinPrice').value = '';
+  document.getElementById('filterMaxPrice').value = '';
   document.getElementById('filterBeds').value = '';
   document.getElementById('filterSort').value = 'featured';
   renderProperties(properties);
 }
 
-['filterType','filterLocation','filterBeds','filterSort'].forEach(id => {
+['filterType','filterLocation','filterMinPrice','filterMaxPrice','filterBeds','filterSort'].forEach(id => {
   document.getElementById(id).addEventListener('change', applyFilters);
 });
 
@@ -657,8 +791,12 @@ function openModal(id) {
   document.getElementById('modalMeta').innerHTML = `
     <div><strong>${p.beds}</strong><span>Bedrooms</span></div>
     <div><strong>${p.baths}</strong><span>Bathrooms</span></div>
-    <div><strong>${p.area}m²</strong><span>Area</span></div>`;
+    <div><strong>${p.area}m²</strong><span>Area</span></div>
+    <div><strong>${p.parking}</strong><span>Parking</span></div>
+    <div><strong>${p.yearBuilt}</strong><span>Year Built</span></div>
+    <div><strong>${p.furnishing}</strong><span>Furnishing</span></div>`;
   document.getElementById('modalDesc').textContent = p.desc;
+  document.getElementById('modalAmenities').innerHTML = p.amenities.map(item => `<li>${item}</li>`).join('');
   updateGallery();
   document.getElementById('modal').classList.add('active');
   document.body.style.overflow = 'hidden';
@@ -688,11 +826,40 @@ document.getElementById('modal').onclick = e => { if (e.target.id === 'modal') c
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
 // ========== CONTACT ==========
-document.getElementById('contactForm').onsubmit = e => {
+const contactForm = document.getElementById('contactForm');
+const formSuccess = document.getElementById('formSuccess');
+const formError = document.getElementById('formError');
+
+contactForm.addEventListener('submit', async (e) => {
   e.preventDefault();
-  alert('Thank you! Your message has been received. Our team will contact you within 24 hours.');
-  e.target.reset();
-};
+
+  formSuccess.style.display = 'none';
+  formSuccess.classList.remove('success');
+  formError.style.display = 'none';
+  formError.classList.remove('error');
+
+  const formData = new FormData(contactForm);
+  const encoded = new URLSearchParams(formData).toString();
+
+  try {
+    const response = await fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: encoded
+    });
+
+    if (!response.ok) {
+      throw new Error('Submission failed');
+    }
+
+    contactForm.reset();
+    formSuccess.style.display = 'block';
+    formSuccess.classList.add('success');
+  } catch (error) {
+    formError.style.display = 'block';
+    formError.classList.add('error');
+  }
+});
 
 // ========== HAMBURGER ==========
 const hamburger = document.getElementById('hamburger');
@@ -700,6 +867,12 @@ const navLinks = document.getElementById('navLinks');
 hamburger.onclick = () => {
   hamburger.classList.toggle('active');
   navLinks.classList.toggle('active');
+};
+hamburger.onkeydown = (e) => {
+  if (e.key === 'Enter' || e.key === ' ') {
+    e.preventDefault();
+    hamburger.click();
+  }
 };
 document.querySelectorAll('.nav-links a').forEach(a => {
   a.onclick = () => {
