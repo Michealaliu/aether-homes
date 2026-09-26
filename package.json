@@ -1,0 +1,13 @@
+{
+  "name": "aether-homes",
+  "version": "1.0.0",
+  "description": "Aether Homes property website with admin API and inquiry tracking",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
