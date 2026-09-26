@@ -11,7 +11,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://aetherhomes.com">
 <meta property="og:image" content="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80">
-<link rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a1525'/%3E%3Cpath d='M16 30L32 18L48 30V46H38V34H26V46H16V30Z' fill='%23c9a227'/%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a1525'/%3E%3Cpath d='M16 22.5c0-4.1 3.3-7.5 7.5-7.5h17c4.1 0 7.5 3.4 7.5 7.5v19c0 4.1-3.4 7.5-7.5 7.5h-17c-4.2 0-7.5-3.4-7.5-7.5v-19zm8 8.5h16v-5H24v5zm0 7h12v-5H24v5z' fill='%23c9a227'/%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -426,7 +426,7 @@ footer { background:#06101a; color:rgba(255,255,255,0.68); padding:60px 0 28px; 
       <div class="about-content">
         <h2>A Legacy of Excellence</h2>
         <p>For over two decades, Aether Homes has been the trusted partner for discerning clients seeking exceptional properties across Nigeria's premier locations.</p>
-        <p>We combine deep market knowledge with an unwavering commitment to quality, privacy, and personalized service — ensuring every client finds not just a house, but a home that reflects their lifestyle.</p>
+        <p>We combine deep market knowledge with an unwavering commitment to quality, privacy, and personalized service — ensuring every client finds not just a house, but a home that reflects their ambitions and lifestyle.</p>
         <div class="stats">
           <div class="stat"><h3>850+</h3><p>Properties Sold</p></div>
           <div class="stat"><h3>22</h3><p>Years Experience</p></div>
@@ -553,7 +553,7 @@ footer { background:#06101a; color:rgba(255,255,255,0.68); padding:60px 0 28px; 
         <div class="contact-item"><strong>Email</strong><span>hello@aetherhomes.com</span></div>
         <div class="contact-item"><strong>Hours</strong><span>Mon – Fri: 9am – 6pm<br>Sat: 10am – 4pm</span></div>
       </div>
-      <form class="contact-form" id="contactForm" name="Aether Homes Contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <form class="contact-form" id="contactForm" name="Aether Homes Contact" method="POST" action="https://formspree.io/f/your-form-id" accept-charset="UTF-8">
         <input type="hidden" name="form-name" value="Aether Homes Contact" />
         <input type="hidden" name="bot-field" />
 
@@ -592,7 +592,7 @@ footer { background:#06101a; color:rgba(255,255,255,0.68); padding:60px 0 28px; 
           <label for="message">Message</label>
           <textarea id="message" name="message" placeholder="Tell us about your requirements..."></textarea>
         </div>
-        <button type="submit" class="btn btn-gold">Send Message</button>
+        <button type="submit" class="btn btn-gold" id="submitButton">Send Message</button>
       </form>
     </div>
   </div>
@@ -663,32 +663,32 @@ footer { background:#06101a; color:rgba(255,255,255,0.68); padding:60px 0 28px; 
 // ========== DATA ==========
 const properties = [
   {id:1,title:"Oceanview Villa",type:"Villa",price:285000000,location:"Lagos",beds:5,baths:6,area:680,
-   images:["https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=85"],
+   images:["https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=85"],
    badge:"Featured",desc:"Exquisite waterfront villa with panoramic ocean views, private pool and smart home technology.",
    amenities:["Private Pool","Smart Home System","Security Gate","Guest House","Garden Lounge"],
    parking:4, yearBuilt:2019, furnishing:"Fully Furnished"},
   {id:2,title:"Modern Penthouse",type:"Apartment",price:145000000,location:"Abuja",beds:4,baths:4,area:320,
-   images:["https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=900&q=85"],
+   images:["https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=900&q=85"],
    badge:"New",desc:"Stunning penthouse with floor-to-ceiling windows and private terrace in the heart of Abuja.",
    amenities:["Terrace","Concierge","Gym Access","EV Charging","City View"],
    parking:2, yearBuilt:2022, furnishing:"Semi-Furnished"},
   {id:3,title:"Colonial Estate",type:"House",price:320000000,location:"Lagos",beds:6,baths:7,area:850,
-   images:["https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=900&q=85"],
+   images:["https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=900&q=85"],
    badge:"Exclusive",desc:"Timeless colonial architecture on expansive grounds with guest house and tennis court.",
    amenities:["Tennis Court","Guest House","Staff Quarters","Landscape Garden","Home Office"],
    parking:5, yearBuilt:2015, furnishing:"Fully Furnished"},
   {id:4,title:"Garden Townhouse",type:"Townhouse",price:95000000,location:"Port Harcourt",beds:3,baths:3,area:210,
-   images:["https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=900&q=85"],
+   images:["https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=900&q=85"],
    badge:"For Sale",desc:"Beautifully maintained townhouse in a secure gated community with private garden.",
    amenities:["Private Garden","Covered Parking","Play Area","Security Patrol","Backyard"],
    parking:2, yearBuilt:2018, furnishing:"Unfurnished"},
   {id:5,title:"Skyline Apartment",type:"Apartment",price:78000000,location:"Lagos",beds:3,baths:3,area:185,
-   images:["https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=900&q=85"],
+   images:["https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=900&q=85"],
    badge:"Hot",desc:"Bright contemporary apartment with city views and premium building amenities.",
    amenities:["Water Front","Pool Deck","Gym","Lift Access","24/7 Security"],
    parking:1, yearBuilt:2021, furnishing:"Semi-Furnished"},
   {id:6,title:"Riverside Villa",type:"Villa",price:410000000,location:"Abuja",beds:7,baths:8,area:920,
-   images:["https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=900&q=85"],
+   images:["https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=85"],
    badge:"Luxury",desc:"Ultra-luxury riverside estate with infinity pool, home cinema and wine cellar.",
    amenities:["Infinity Pool","Cinema Room","Wine Cellar","Riverside Views","Lawn & Patio"],
    parking:6, yearBuilt:2023, furnishing:"Fully Furnished"}
@@ -705,7 +705,7 @@ setInterval(() => {
   slides[currentSlide].classList.remove('active');
   currentSlide = (currentSlide + 1) % slides.length;
   slides[currentSlide].classList.add('active');
-}, 5000); // changes every 5 seconds
+}, 5000);
 
 // ========== RENDER PROPERTIES ==========
 function formatPrice(p) { return '₦' + p.toLocaleString(); }
@@ -836,6 +836,7 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal()
 const contactForm = document.getElementById('contactForm');
 const formSuccess = document.getElementById('formSuccess');
 const formError = document.getElementById('formError');
+const submitButton = document.getElementById('submitButton');
 
 contactForm.addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -845,14 +846,20 @@ contactForm.addEventListener('submit', async (e) => {
   formError.style.display = 'none';
   formError.classList.remove('error');
 
+  submitButton.disabled = true;
+  submitButton.textContent = 'Sending...';
+
   const formData = new FormData(contactForm);
-  const encoded = new URLSearchParams(formData).toString();
+  const targetUrl = contactForm.action || '/';
 
   try {
-    const response = await fetch('/', {
+    const response = await fetch(targetUrl, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: encoded
+      headers: {
+        'Accept': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest'
+      },
+      body: formData
     });
 
     if (!response.ok) {
@@ -865,6 +872,9 @@ contactForm.addEventListener('submit', async (e) => {
   } catch (error) {
     formError.style.display = 'block';
     formError.classList.add('error');
+  } finally {
+    submitButton.disabled = false;
+    submitButton.textContent = 'Send Message';
   }
 });
 
