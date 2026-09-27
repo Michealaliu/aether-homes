@@ -1,0 +1,6 @@
+{
+  "siteId": "YOUR_NETLIFY_SITE_ID",
+  "api": {
+    "auth": "YOUR_NETLIFY_AUTH_TOKEN"
+  }
+}
